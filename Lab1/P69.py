@@ -2,28 +2,11 @@
 
 from __future__ import division, print_function
 from visual import *
-from commands import *
+from screenshot import GetScreenShot
 
 
-# Used to get a screenshot for part (a)
-def GetScreenShota(FrameNumber):
-    tmp          = getoutput('/usr/bin/gnome-screenshot') # Uses gnome-screenshot to take screenshot
-    tmp          = getoutput('mv ~/Pictures/Screenshot*.png ~/PycharmProjects/Physics/Lab1/P69a.png') # moves it from default directory to Lab1
-
-# Used to get a screenshot for part (b)
-def GetScreenShotb(FrameNumber):
-    tmp          = getoutput('/usr/bin/gnome-screenshot') # Uses gnome-screenshot to take screenshot
-    tmp          = getoutput('mv ~/Pictures/Screenshot*.png ~/PycharmProjects/Physics/Lab1/P69b.png') # moves it from default directory to Lab1
-
-
-
-scene.width  = 500 # Changes the width of the vpython visual
-scene.height = 500 # Changes the height of the vpython visual
-
-FrameNumber = 1 # Denotes a single frame
-
-# 69(a)
 # create a 'cube', of radius 3, with one sphere at each corner
+# Part (a)
 
 one                     = sphere()
 one.pos         		= 3 * vector(-1,-1,1)
@@ -65,15 +48,16 @@ eight.pos       		= 3 * vector(-1, 1, -1)
 eight.radius    		=  0.5
 eight.color     		= color.magenta
 
-GetScreenShota(FrameNumber) # Triggers the GetScreenShota Function
+GetScreenShot(1) # Triggers the GetScreenShota Function
 
-# 69(b)
+# Produces an arrow that connects from sphere one to sphere six
+# Part (b)
 arrow                 = arrow()
 arrow.pos             = one.pos
 arrow.axis            = 2 * six.pos
 arrow.shaftwidth      = 0.2
 arrow.color           = color.cyan
 
-GetScreenShotb(FrameNumber) # Triggers the GetScreenShotb Function
+GetScreenShot(1) # Triggers the GetScreenShotb Function
 
 # Note: that the screenshots displayed in the document have been cropped.

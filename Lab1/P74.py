@@ -1,3 +1,5 @@
+# Spencer Riley
+
 from __future__ import division, print_function
 from visual import *
 
@@ -6,10 +8,10 @@ from visual import *
 # Divide the sequence into two starting inputs
 
 # 0,1,2,3,4,5,6,7,8,9
-x = -1 # first input (0-1)
+x = -1 # first input (0-1 = -1)
 
 # 4,5,6,7,8,9,10,11,12,13
-y = 3 # second input (4-1)
+y = 3 # second input (4-1 = 3)
 
 while y < 13: # y is the largest number, and thus will act as the limiting variable
     x = x + 1 # adds one to the first input

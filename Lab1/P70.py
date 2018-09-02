@@ -1,19 +1,9 @@
+# Spencer Riley
+
 from __future__ import division, print_function
 from visual import *
-from commands import *
+from screenshot import GetScreenShot
 
-# Used to get a screenshot
-def GetScreenShot(FrameNumber):
-    tmp          = getoutput('/usr/bin/gnome-screenshot') # Uses gnome-screenshot to take screenshot
-    tmp          = getoutput('mv ~/Pictures/Screenshot*.png ~/PycharmProjects/Physics/Lab1/P70.png') # moves it from default directory to Lab1
-
-
-scene.width  = 500 # Changes the width of the vpython visual
-scene.height = 500 # Changes the height of the vpython visual
-
-FrameNumber = 1 # Denotes a single frame
-
-# 70
 # Create an x,y,z axis with cylinders of different colors
 
 # The x-axis
@@ -51,6 +41,6 @@ neg_z_axis.pos  	= -1 * z_axis.pos
 neg_z_axis.axis 	= -1 * z_axis.axis
 neg_z_axis.color 	= z_axis.color
 
-GetScreenShot(FrameNumber) # Triggers the GetScreenShot Function
+GetScreenShot(1) # Triggers the GetScreenShot Function
 
 # Note: that the screenshots displayed in the document have been cropped.
