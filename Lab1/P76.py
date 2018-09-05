@@ -2,7 +2,7 @@
 
 from __future__ import division, print_function
 from visual import *
-from screenshot import GetScreenShot # Required to have screenshot.py
+#from screenshot import GetScreenShot # Required to have screenshot.py
 
 theta = 0 # Initial definition of theta
 
