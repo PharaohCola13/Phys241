@@ -2,7 +2,7 @@
 
 from __future__ import division, print_function
 from visual import *
-from screenshot import GetScreenShot # Required to have screenshot.py
+#from screenshot import GetScreenShot # Required to have screenshot.py
 
 
 # This creates a two boxes linked by an arrow
