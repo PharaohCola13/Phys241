@@ -1,1 +1,3 @@
-# Phys241
+## NMT Physics 241 Lab
+
+
