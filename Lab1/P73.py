@@ -20,6 +20,6 @@ arrow.pos         = box_1.pos
 arrow.axis        = 2 * box_2.pos
 arrow.shaftwidth  = 0.5
 
-GetScreenShot(1) # Triggers the GetScreenShot Function
+# GetScreenShot(1) # Triggers the GetScreenShot Function
 
 # Note: that the screenshots displayed in the document have been cropped.

@@ -2,7 +2,7 @@
 
 from __future__ import division, print_function
 from visual import *
-from screenshot import GetScreenShot
+from screenshot import GetScreenShot # Required to have screenshot.py
 
 i_hat 			  = vector(1, 0, 0) # creates the i hat direction
 j_hat 			  = vector(0, 1, 0) # creates the j hat direction
@@ -41,6 +41,6 @@ while k_hat.z < 10:	    # while the z-componet of k_hat is less than 10, create 
 
     k_hat.z 	  = k_hat.z + 2 # separates each box by 2 units
 
-GetScreenShot(1) # Triggers the GetScreenShot Function
+# GetScreenShot(1) # Triggers the GetScreenShot Function
 
 # Note: that the screenshots displayed in the document have been cropped.
