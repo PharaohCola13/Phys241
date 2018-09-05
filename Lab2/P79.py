@@ -20,8 +20,9 @@ while t < 20:
     rate(100)
     particle.pos = particle.pos + v * delta_t
 
-    if particle.pos.z == circle.pos.z:
-        v.z = v.z - 2
+    if particle.pos.x >= (circle.pos.x - 1.25):
+        v = vector(0.75, 0, -0.75)
+        print('stuffy stuff')
     
     t = t + delta_t
     
