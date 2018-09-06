@@ -2,7 +2,7 @@
 
 This tutorial page will describe how to operate VPython scripts on a Linux Desktop. The screenshots used in this example are from Pycharm, the IDE that I am using.
 
-**Note: This is only for Python 2 users.**
+**Note: This will only work for Python 2.**
 
 
 ## Table of Contents
@@ -22,4 +22,12 @@ apt-get install python-visual libgtkglextmm-x11-1.2-dev
 
 
 ## Issues
+A recurring issue with running VPython via this method is the following warning:
+```
+/usr/lib/python2.7/dist-packages/visual/materials.py:70: FutureWarning: 
+comparison to `None` will result in an elementwise object comparison in the future.
+  self.__setattr__(key, value)
 
+```
+Based on my experience, I have not noticed any consequences of this warning at all.
+The VPython scripts will still run in the same fashion as in VIDLE.
