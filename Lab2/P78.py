@@ -8,6 +8,8 @@ from visual import *
 # 4) the value is 0.05
 # 5) The particle will travel through the box,
 
+purple = vector(0.4, 0.2, 0.6)
+
 box(pos=vector(0,0,-1),
     size=(5,5,0.5),
     color=color.red,
@@ -15,7 +17,7 @@ box(pos=vector(0,0,-1),
 
 particle = sphere(pos=vector(6,0,0),
                   radius=0.3,
-                  color=color.cyan,
+                  color= purple,
                   make_trail = True)
 
 v = vector(-1,0,0)
