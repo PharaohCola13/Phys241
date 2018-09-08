@@ -9,16 +9,16 @@
 <meta name="generator" content="Jekyll v3.7.3" />
 <meta property="og:title" content="NMT Physics 241 Lab" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Physical modeling for New Mexico Tech Physics 241" />
-<meta property="og:description" content="Physical modeling for New Mexico Tech Physics 241" />
+<meta name="description" content="Physical Modeling for New Mexico Tech Physics 241" />
+<meta property="og:description" content="Physical Modeling for New Mexico Tech Physics 241" />
 <link rel="canonical" href="http://localhost:4000/" />
 <meta property="og:url" content="http://localhost:4000/" />
 <meta property="og:site_name" content="Phys 241" />
 <script type="application/ld+json">
-{"name":"Phys 241","description":"Physical modeling for New Mexico Tech Physics 241","@type":"WebSite","url":"http://localhost:4000/","headline":"NMT Physics 241 Lab","@context":"http://schema.org"}</script>
+{"name":"Phys 241","description":"Physical Modeling for New Mexico Tech Physics 241","@type":"WebSite","url":"http://localhost:4000/","headline":"NMT Physics 241 Lab","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=9753e0751c9281f2171b90cfdf24b8584da4389c">
+    <link rel="stylesheet" href="/assets/css/style.css?v=716d77d97438e387e8ba3b3c6ec1fcc4ed5251ab">
     <script src="https://code.jquery.com/jquery-3.3.0.min.js" integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4=" crossorigin="anonymous"></script>
     <script src="/assets/js/main.js"></script>
     <!--[if lt IE 9]>
@@ -27,18 +27,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   </head>
-  <body>
+<body>
 
       <header>
         <h1>Phys 241</h1>
-        <p>Physical modeling for New Mexico Tech Physics 241</p>
+        <p>Physical Modeling for New Mexico Tech Physics 241</p>
       </header>
 
       <div id="banner">
         <span id="logo"></span>
-
+        <div>
         <a href="http://github.com/pharaohcola13/Phys241" class="button fork"><strong>View On GitHub</strong></a>
-        
+        </div>
+
+          <div>
+            <a href="vpython.html" class="button fork"><strong>VPython Documentation</strong></a>
+            </div>
       </div><!-- end banner -->
 
     <div class="wrapper">
@@ -47,52 +51,6 @@
       </nav>
       <section>
         <h1 id="nmt-physics-241-lab">NMT Physics 241 Lab</h1>
-
-<p>This tutorial page will describe how to operate VPython scripts on a Linux Desktop. The screenshots used in this example are from Pycharm, the IDE that I am using.</p>
-
-<p><strong>Note: This will only work for Python 2.</strong></p>
-
-<h1 id="table-of-contents">Table of Contents</h1>
-<ul>
-  <li>Setup</li>
-  <li>Executing Scripts</li>
-  <li>Issues</li>
-  <li>VPython
-    <ul>
-      <li>Objects
-        <ul>
-          <li>Object Attributes</li>
-        </ul>
-      </li>
-      <li>Color Options
-        <ul>
-          <li>Defining a Color</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h1 id="setup">Setup</h1>
-<hr />
-<p>There are two primary packages that are needed to operate VPython on Linux. To install them input the following commands into your terminal.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install python-visual libgtkglextmm-x11-1.2-dev
-</code></pre></div></div>
-
-<h1 id="executing-scripts">Executing Scripts</h1>
-<hr />
-
-<h1 id="issues">Issues</h1>
-<hr />
-<p>A recurring issue with running VPython via this method is the following warning:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/lib/python2.7/dist-packages/visual/materials.py:70: FutureWarning: 
-comparison to `None` will result in an elementwise object comparison in the future.
-  self.__setattr__(key, value)
-
-</code></pre></div></div>
-<p>Based on my experience, I have not noticed any consequences of this warning at all.
-The VPython scripts will still run in the same fashion as in VIDLE.</p>
 
 <h1 id="vpython">VPython</h1>
 <hr />
@@ -116,7 +74,7 @@ The VPython scripts will still run in the same fashion as in VIDLE.</p>
 <span class="nb">object</span><span class="o">.</span><span class="n">radius</span>    <span class="o">=</span>   <span class="mf">0.5</span> <span class="c"># Sets the radius</span>
 <span class="nb">object</span><span class="o">.</span><span class="n">color</span>     <span class="o">=</span>   <span class="n">color</span><span class="o">.</span><span class="n">red</span> <span class="c"># Sets the color</span>
 <span class="nb">object</span><span class="o">.</span><span class="n">shininess</span> <span class="o">=</span>   <span class="mf">0.6</span> <span class="c"># Sets the shininess</span>
-<span class="nb">object</span><span class="o">.</span><span class="n">emissive</span>  <span class="o">=</span>   <span class="bp">False</span> 
+<span class="nb">object</span><span class="o">.</span><span class="n">emissive</span>  <span class="o">=</span>   <span class="bp">False</span>
 <span class="nb">object</span><span class="o">.</span><span class="n">opacity</span>   <span class="o">=</span>   <span class="mf">0.8</span> <span class="c"># Sets the transparency </span>
 </code></pre></div></div>
 
@@ -143,14 +101,6 @@ The VPython scripts will still run in the same fashion as in VIDLE.</p>
 
 
       </section>
-      <footer>
-        
-          <p>Project maintained by <a href="http://github.com/pharaohcola13">pharaohcola13</a></p>
-        
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
-    </div>
 
-    
-  </body>
+</body>
 </html>
