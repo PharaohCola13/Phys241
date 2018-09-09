@@ -22,6 +22,12 @@ apt-get install python-visual libgtkglextmm-x11-1.2-dev
 # Executing Scripts
 ---
 
+Just like any other Python script, VPython scripts can be run from the file location using the command:
+```
+python [name of script file].py
+```
+
+
 # Issues
 ---
 A recurring issue with running VPython via this method is the following warning:
