@@ -298,8 +298,13 @@ table {
                 font-style: normal;
                 font-weight: normal
                 }
-
-font-family: 'Ubuntu', sans-serif;
+@font-face {
+                font-family: 'Ubuntu';
+                src: url("../fonts/Ubuntu-Regular.ttf");
+                format("TTF");
+                font-style: normal;
+                font-weight: normal
+                }
 
 font-family: 'Ubuntu Mono', monospace;
 
