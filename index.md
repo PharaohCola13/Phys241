@@ -66,7 +66,9 @@ object.emissive  =   False
 object.opacity   =   0.8 # Sets the transparency 
 ```
 
-## Color options
+## Colors
+
+### Pre-Defined Colors
   - Red
   - Green
   - Blue
