@@ -9,12 +9,6 @@ This tutorial page will describe how to operate VPython scripts on a Linux Deskt
   - Setup
   - Executing Scripts
   - Issues
-  - VPython
-    - Objects
-        - Object Attributes
-    - Color Options
-        - Defining a Color
-    
 
 
 # Setup
