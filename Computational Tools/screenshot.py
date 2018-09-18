@@ -4,7 +4,7 @@ from visual import *
 from commands import*
 
 lab = input('What is the lab number?\n>> ')
-question = input('What question is this?\n>> ')
+question = raw_input('What question is this?\n>> ')
 
 w_default = 500 # sets default value of width to 500
 # width = input('What should the scene width be?\n>> ')
@@ -29,7 +29,7 @@ def GetScreenShot(FrameNumber):
 
     # moves it from default directory to Lab
     tmp          = getoutput('mv ~/Pictures/Screenshot*.png'
-                             ' ~/PycharmProjects/Physics/Lab{}/Figures/P{}.png'
+                             ' ~/PycharmProjects/Physics/Lab{}/Figures/{}.png'
                              .format(lab, question))
 
 scene.height = h_default
