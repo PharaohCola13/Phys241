@@ -3,9 +3,6 @@ from visual import *
 from visual.graph import *
 from random import *
 
-#sys.path.insert(0, '../Computational Tools/')
-#from screenshot import GetScreenShot
-
 #theta           = radians(15)
 # X-axis
 x_axis          = arrow()
@@ -32,7 +29,7 @@ rand_color = vector(randint(0, 255)/255, randint(0, 255)/255, randint(0, 255)/25
 tennis_ball         = sphere(make_trail=True)
 tennis_ball.pos     = (0, 0, 0) # Initial position
 tennis_ball.m       = 0.055 # Mass of tennis ball in kg
-tennis_ball.v       = vector((31.75)*cos(pi/4), (31.75)*sin(pi/4), 0) # Velocity with magnitude of 55 m/s
+tennis_ball.v       = vector((31.75)*cos(pi/3), (31.75)*sin(pi/3), 0) # Velocity with magnitude of 55 m/s
 tennis_ball.radius  = 5 # in meters
 tennis_ball.p       = tennis_ball.m * tennis_ball.v # momentum
 tennis_ball.color   = rand_color
@@ -42,8 +39,7 @@ t = 0 # Initial time
 dt = 0.1 # Time step
 
 while t < 100 * dt:
-
-    rate(10)
+    rate(50)
     F_grav          = tennis_ball.m * vector(0, -9.81, 0) # Force of gravity in Newtons
     tennis_ball.p   = tennis_ball.p + F_grav * dt # Update tennis ball's momentum
     tennis_ball.pos = tennis_ball.pos + (tennis_ball.p/tennis_ball.m) * dt # Update tennis ball's position

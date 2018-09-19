@@ -2,9 +2,6 @@ from __future__ import division, print_function
 from visual import *
 from random import *
 
-sys.path.insert(0, '../Computational Tools/')
-from screenshot import GetScreenShot
-
 # Random Color
 rand_color = vector(randint(0, 255)/255, randint(0, 255)/255, randint(0, 255)/255)
 
@@ -24,10 +21,8 @@ cart.v = vector(-0.5, 0, 0) # cart's velocity
 cart.p = cart.m * cart.v # cart's momentum
 
 dt      = 0.01 # Time step
-t       = 0 # inital time
+t       = 0 # initial time
 
-GetScreenShot(1)
-# b) time to travel 2 meters is 4 seconds
 while t < 100:
     rate(100)
     F_air = vector(0.053, 0, 0) # Force of the air

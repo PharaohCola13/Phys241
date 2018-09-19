@@ -31,7 +31,7 @@ cart.size   = vector(0.1, 0.04, 0.06)
 cart.color  = rand_color
 
 cart.m = 0.8 # mass of cart
-cart.v = vector(-0.5, 0, 0) # Initial velocity of cart
+cart.v = vector(-0.5, 0.2, 0) # Initial velocity of cart
 cart.p = cart.m * cart.v # Initial momentum of cart
 
 dt      = 0.01 # Time step
@@ -40,14 +40,11 @@ t       = 0 # Initial time
 f1 = gcurve(gdisplay = gd1, color=color.white) # Define functions to plot
 f2 = gcurve(gdisplay = gd2, color=color.cyan) # Define functions to plot
 
-# b) time to travel 2 meters is 4 seconds
 while t < 15:
     rate(100)
     F_air = vector(0.053, 0, 0) # Force of air
     cart.p   = cart.p + F_air * dt # Update momentum
     cart.pos = cart.pos + (cart.p/cart.m) * dt # Update position
-# The shape of the plot is due to the component relating to the square of the time.
     f1.plot(pos=(t,cart.pos.x)) # Plots position vs time
-# The shape of the plot is a linear, as a result of the momentum being a linear function. Where F_air represents the slope.
     f2.plot(pos=(t,cart.p.x)) # plots momentum vs time
     t = dt + t # Updates time
