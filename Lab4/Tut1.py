@@ -2,106 +2,106 @@ from __future__ import division, print_function
 from visual import *
 
 # Constants
-G = 6.7e-11
-Fscale = 4.5e4
+G = 6.7e-11 # Gravitational constant 
+Fscale = 4.5e4 # Scaling Factor
 
-mcraft  = 15e3
-mplanet = 6e24
+mcraft  = 15e3 # Mass of the crafts
+mplanet = 6e24 # Mass of the planet
 
-planet              = sphere()
-planet.radius       = 6.4e6
-planet.pos          = vector(0,0,0)
-planet.color        = color.magenta
-planet.m            = mplanet
+# Creates the planet
+planet           = sphere()
+planet.radius    = 6.4e6
+planet.pos       = vector(0,0,0)
+planet.color     = color.magenta
+planet.m         = mplanet
 
-craft               = sphere()
-craft.radius        = 3e6
-craft.pos           = vector(-13e7, 6.5e7, 0)
-craft.color         = color.red
-craft.m             = mcraft
+craft1           = sphere()
+craft1.radius    = 3e6
+craft1.pos       = vector(-13e7, 6.5e7, 0)
+craft1.color     = color.red
+craft1.m         = mcraft
 
-craft_one           = sphere()
-craft_one.radius    = 3e6
-craft_one.pos       = vector(-6.5e7, 6.5e7, 0)
-craft_one.color     = color.orange
-craft_one.m         = mcraft
+craft2           = sphere()
+craft2.radius    = 3e6
+craft2.pos       = vector(-6.5e7, 6.5e7, 0)
+craft2.color     = color.orange
+craft2.m         = mcraft
 
-craft_two           = sphere()
-craft_two.radius    = 3e6
-craft_two.pos       = vector(0, 6.5e7, 0)
-craft_two.color     = color.yellow
-craft_two.m         = mcraft
+craft3           = sphere()
+craft3.radius    = 3e6
+craft3.pos       = vector(0, 6.5e7, 0)
+craft3.color     = color.yellow
+craft3.m         = mcraft
 
-craft_three         = sphere()
-craft_three.radius  = 3e6
-craft_three.pos     = vector(6.5e7, 6.5e7, 0)
-craft_three.color   = color.green
-craft_three.m       = mcraft
+craft4          = sphere()
+craft4.radius   = 3e6
+craft4.pos      = vector(6.5e7, 6.5e7, 0)
+craft4.color    = color.green
+craft4.m        = mcraft
 
-craft_four          = sphere()
-craft_four.radius   = 3e6
-craft_four.pos      = vector(13e7, 6.5e7, 0)
-craft_four.color    = color.cyan
-craft_four.m        = mcraft
+craft5          = sphere()
+craft5.radius   = 3e6
+craft5.pos      = vector(13e7, 6.5e7, 0)
+craft5.color    = color.cyan
+craft5.m        = mcraft
 
-r       = craft.pos - planet.pos
-rmag    = mag(r)
-rhat    = Fscale * norm(r)
+# Calculates the distance between the planet and the craft 
+r1       = craft1.pos - planet.pos
+r1mag    = mag(r1)
+r1hat    = Fscale * norm(r1)
 
-r1       = craft_one.pos -  planet.pos
-rmag1    = mag(r1)
-rhat1    = Fscale * norm(r1)
+r2       = craft2.pos -  planet.pos
+r2mag    = mag(r2)
+r2hat    = Fscale * norm(r2)
 
-r2       = craft_two.pos -  planet.pos
-rmag2    = mag(r2)
-rhat2    = Fscale * norm(r2)
+r3       = craft3.pos -  planet.pos
+r3mag    = mag(r3)
+r3hat    = Fscale * norm(r3)
 
-r3       = craft_three.pos -  planet.pos
-rmag3    = mag(r3)
-rhat3    = Fscale * norm(r3)
+r4       = craft4.pos -  planet.pos
+r4mag    = mag(r4)
+r4hat    = Fscale * norm(r4)
 
-r4       = craft_four.pos -  planet.pos
-rmag4    = mag(r4)
-rhat4    = Fscale * norm(r4)
+r5       = craft5.pos -  planet.pos
+r5mag    = mag(r5)
+r5hat    = Fscale * norm(r5)
 
+# Calculates the magnitude of gravitational force acting on the craft
+Fgrav1   = G * (mplanet * mcraft)/(r1mag**2)
+Fgrav2   = G * (mplanet * mcraft)/(r2mag**2)
+Fgrav3   = G * (mplanet * mcraft)/(r3mag**2)
+Fgrav4   = G * (mplanet * mcraft)/(r4mag**2)
+Fgrav5   = G * (mplanet * mcraft)/(r5mag**2)
 
-Fgrav    = G * (mplanet * mcraft)/(rmag**2)
-Fgrav1   = G * (mplanet * mcraft)/(rmag1**2)
-Fgrav2   = G * (mplanet * mcraft)/(rmag2**2)
-Fgrav3   = G * (mplanet * mcraft)/(rmag3**2)
-Fgrav4   = G * (mplanet * mcraft)/(rmag4**2)
+# Calculates the net force acting on the the crafts
+Fnet1    = -F1grav  * r1hat
+Fnet2    = -F2grav * r2hat
+Fnet3    = -F3grav * r3hat
+Fnet4    = -F4grav * r4hat
+Fnet5    = -F5grav * r5hat
 
-Fnet     = -Fgrav  * rhat
-Fnet1    = -Fgrav1 * rhat1
-Fnet2    = -Fgrav2 * rhat2
-Fnet3    = -Fgrav3 * rhat3
-Fnet4    = -Fgrav4 * rhat4
+# Creates a vector pointing in the direction of the planet with a magnitude of the gravitational force
+gvector1         = arrow()
+gvector1.pos     = craft1.pos
+gvector1.axis    = Fnet1
+gvector1.color   = color.yellow
 
+gvector2         = arrow()
+gvector2.pos     = craft2.pos
+gvector2.axis    = Fnet2
+gvector2.color   = color.yellow
 
-print("Fnet = {} N".format(Fnet))
+gvector3         = arrow()
+gvector3.pos     = craft3.pos
+gvector3.axis    = Fnet3
+gvector3.color   = color.yellow
 
-print(rmag)
-gvector             = arrow()
-gvector.pos         = craft.pos
-gvector.axis        = Fnet
-gvector.color       = color.yellow
+gvector4         = arrow()
+gvector4.pos     = craft4.pos
+gvector4.axis    = Fnet4
+gvector4.color   = color.yellow
 
-gvector_one         = arrow()
-gvector_one.pos     = craft_one.pos
-gvector_one.axis    = Fnet1
-gvector_one.color   = color.yellow
-
-gvector_two         = arrow()
-gvector_two.pos     = craft_two.pos
-gvector_two.axis    = Fnet2
-gvector_two.color   = color.yellow
-
-gvector_three       = arrow()
-gvector_three.pos   = craft_three.pos
-gvector_three.axis  = Fnet3
-gvector_three.color = color.yellow
-
-gvector_four        = arrow()
-gvector_four.pos    = craft_four.pos
-gvector_four.axis   = Fnet4
-gvector_four.color  = color.yellow
+gvector5         = arrow()
+gvector5.pos     = craft5.pos
+gvector5.axis    = Fnet5
+gvector5.color   = color.yellow
