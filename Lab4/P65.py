@@ -9,21 +9,23 @@ G = 6.7e-11 # Gravitational Constant
 # Creates a sphere representing Earth
 Earth = sphere()
 Earth.pos = vector(0,0,0)
-Earth.radius = 1
-Earth.m = 1
+Earth.radius = 6.4e6
+Earth.m = 6e24
+Earth.material = materials.earth
 
 # Creates a craft
 craft = sphere(make_trail=True)
 craft.v = vector(0,2e3,0) # m/s
 craft.m = mcraft
-craft.pos = vector(0, 10 * Earth.radius, 0)
+craft.radius = 1e6
+craft.pos = vector(0,0,10 * Earth.radius)
 
 craft.p = craft.m * craft.v
 
 while True:
-    rate(1)
+    rate(100)
     # Distance
-    r = craft.pos - Earth.pos
+    r =  craft.pos - Earth.pos
     rmag = mag(r)
     rhat = norm(r)
     
