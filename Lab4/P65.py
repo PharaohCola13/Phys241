@@ -26,25 +26,25 @@ craft.color     = color.white
 craft.m         = 1.5e4 # kg
 
 # Circular Orbit
-craft.v        = vector(0, sqrt(G * earth.m/(mag(craft.pos) * D)), 0)
+#craft.v        = vector(0, sqrt(G * earth.m/(mag(craft.pos) * D)), 0)
 
 # Elliptical Orbit
-#craft.v0        = 0.75 * vector(0, sqrt(G * earth.m/(mag(craft.pos) * AU2m)), 0)
+craft.v        = 0.75 * vector(0, sqrt(G * earth.m/(mag(craft.pos) * D)), 0)
 
 # Arrow used to represent the momentum 
-# momentum = arrow()
-# momentum.color = color.green
+momentum = arrow()
+momentum.color = color.green
 #
 # Arrow used to represent the net force
-# force = arrow()
-# force.color = color.magenta
+force = arrow()
+force.color = color.magenta
 
 craft.p         = craft.m * craft.v
 
 t   = 0 # Initial Time
 dt  = 60 # Time step
 
-while True:
+while t < 1500 * dt:
     rate(1e3)
     
     # Distance between the craft and the earth
@@ -61,18 +61,10 @@ while True:
     # Update Position of craft
     craft.pos   = craft.pos + (craft.p /craft.m/D) * dt
 
-    # momentum.pos = craft.pos
-    # momentum.axis = ScaleP * craft.p
+    momentum.pos = craft.pos
+    momentum.axis = ScaleP * craft.p
     #
-    # force.pos = craft.pos
-    # force.axis = ScaleF * Fnet
+    force.pos = craft.pos
+    force.axis = ScaleF * Fnet
 
     t = t + dt
-
-
-
-
-
-
-
-

@@ -7,7 +7,7 @@ YinS    = 365.*24.*60.*60 # Seconds in a Earth year
 AU      = 1.5e11 # Distance from Earth to the sun in meters
 
 # First star
-star             = sphere()
+star             = sphere(make_trail=True)
 star.pos         = vector(0,0,0)
 star.radius      = 0.1
 star.m           = 2e30 # kg
@@ -31,7 +31,7 @@ star2.p          = star2.m * star2.v
 t   = 0 # Initial Time
 dt  = YinS/10000 # Time step
 
-while True:
+while t < 10000 * dt:
     rate(1e3)
 
     # Distance between the two stars

@@ -15,18 +15,18 @@ sun.radius = 0.1
 sun.color = color.yellow
 sun.material = materials.emissive
 
-sun.v0 = vector(0, 0, 0)
+sun.v = vector(0, 0, 0)
 sun.m = 2e30  # kg
-sun.p = sun.m * sun.v0
+sun.p = sun.m * sun.v
 
 mars = sphere(make_trail=True)
 mars.pos = vector(1, 0, 0)
 mars.radius = 0.05
 mars.color = color.red
 
-mars.v0 = vector(0, sqrt(G * sun.m / (mag(mars.pos) * Martian)), 0)  # m/s
+mars.v = vector(0, sqrt(G * sun.m / (mag(mars.pos) * Martian)), 0)  # m/s
 mars.m = 6.4e23  # kg
-mars.p = mars.m * mars.v0
+mars.p = mars.m * mars.v
 
 # Creates arrow to track momentum
 momentum = arrow()
