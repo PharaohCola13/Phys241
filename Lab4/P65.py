@@ -18,11 +18,8 @@ Earth.material = materials.earth
 
 # Creates a craft
 craft = sphere(make_trail=True)
-craft.v = vector(-2e3,0,0) # m/s
-
-# part c
-# vector(1e3*cos(pi), 2e3*sin(pi), 0) --> Elipitical Orbit
-
+craft.v = vector(0,sqrt(G * Earth.m/(mag(earth.pos)*AU2m),0) # m/s
+                 
 craft.m = mcraft
 craft.radius = 1e6 # in m
 craft.pos = vector(0,10 * Earth.radius,0)
