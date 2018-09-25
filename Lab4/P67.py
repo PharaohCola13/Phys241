@@ -1,54 +1,56 @@
-from __future__ import division, print_function
+# Spencer Riley
+from __future__ import print_function, division
 from visual import *
 
-G = 6.67e-11  # N*m2/Kg2
-MinS = 1. * 30. * 24. * 60. * 60.  # 1 month in seconds
+G = 6.7e-11  # Nm2/kg2
+MinS = 30. * 24. * 60. * 60  # seconds in a month
+Lunar = 3.8e8  # Distance from Earth and moon in meters
 
-AU2m = 384e6# Distance from earth to moon
-
-# Create the objects in our program
-earth           = sphere()
+# Create objects
+earth           = sphere(make_trail=True)
 earth.pos       = vector(0, 0, 0)
-earth.radius    = 6.4e6 * 10
-earth.color     = color.white
+earth.radius    = 0.1
+earth.material  = materials.earth
 
-moon        = sphere(make_trail=True)
-moon.pos    = vector(AU2m, 0, 0)
-moon.radius = 1.7e6 * 10
-moon.color  = color.blue
+earth.v0        = vector(0, 0, 0)
+earth.m         = 6e24  # kg
+earth.p         = earth.m * earth.v0
 
-# Define the masses of our objects
-earth.m = 6e24  # Kg
-moon.m = 7.35e22  # Kg
 
-# We assume the earth is initially not moving
-earth.v = vector(0, 0, 0)
+moon           = sphere(make_trail=True)
+moon.pos       = vector(1, 0,0)
+moon.radius    = 0.05
 
-# For the moon we know it takes one year to go around one orbit
-CircOrb = 2 * pi * AU2m
-moon.v = vector(0, .1 * CircOrb/MinS, 0)
+moon.v0        = vector(0,sqrt(G * earth.m / (mag(moon.pos) * Lunar * 0.92)), 0)  # m/s
+moon.m         = 7e22  # kg
+moon.p         = moon.m * moon.v0
 
-# Create the momentum vectors
-moon.p = earth.m * earth.v
-moon.p = moon.m * moon.v
-
+# While loop somewhere in here
 t = 0
-dt = MinS/1000
+dt = MinS / 1000
 
-while True:
+#Add timestamp label
+timestamp = label(pos=vector(0,0.5,0),color=color.red,text='Time in Months: ')
+
+
+while t < 1000 *  dt:
     rate(1e2)
 
-    # 1st calculate the relative position   
-    r = (moon.pos - earth.pos) * AU2m
+    timestamp.text ='Time in Months: {:6.2f}'.format(t/(MinS))
+
+
+    r = (moon.pos - earth.pos) * Lunar
     rmag = mag(r)
     rhat = norm(r)
-
-    # 2nd Calculate the force magnitude
-    Fmag = G * (moon.m * earth.m)/ rmag**2
+    
+    Fmag = G * earth.m * moon.m / rmag**2
     Fnet = -Fmag * rhat
 
     moon.p = moon.p + Fnet * dt
-    moon.pos = moon.pos + (moon.p/moon.m/AU2m) * dt
+    earth.p = earth.p + (-Fnet) * dt
 
-    # Update the time
+    # update our position
+    moon.pos = moon.pos + (moon.p / moon.m / Lunar) * dt
+    earth.pos = earth.pos + (earth.p / earth.m / Lunar) * dt
+
     t = t + dt

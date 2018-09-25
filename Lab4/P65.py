@@ -1,61 +1,73 @@
-from __future__ import division, print_function
+# Spencer Riley
+from __future__ import print_function, division
 from visual import *
 
-mcraft = 1.5e4 # mass of craft in kg
-dt = 60 # in s
-t = 0
-G = 6.7e-11 # Gravitational Constant
-Fscale = 1e-1 # Scaling Factor for momentum
-Fscale2 = 3e2 # Scaling Factor for force
+# Declare constants
+AU2m    = 6.4e7 #meters in an AU
+G       = 6.7e-11  # Nm2/kg2
+ScaleP = 1e-8
+ScaleF = 1e-4
+
+# Create objects
+earth           = sphere()
+earth.pos       = vector(0, 0, 0)
+earth.radius    = 0.1
+earth.material  = materials.earth
+
+earth.v0        = vector(0, 0, 0)
+earth.m         = 6e24  # kg
+earth.p         = earth.m * earth.v0
+
+craft           = sphere(make_trail=True)
+craft.pos       = vector(1, 0, 0)
+craft.radius    = 0.01
+craft.color     = color.white
+
+craft.m         = 1.5e4 # kg
+# Circular Orbit
+craft.v0        = vector(0, sqrt(G * earth.m/(mag(craft.pos) * AU2m)), 0)
 
 
-# Creates a sphere representing Earth
-Earth = sphere()
-Earth.pos = vector(0,0,0)
-Earth.radius = 6.4e6 # in m
-Earth.m = 6e24 # in kg
-Earth.material = materials.earth
+# Elliptical Orbit
+#craft.v0        = 0.75 * vector(0, sqrt(G * earth.m/(mag(craft.pos) * AU2m)), 0)
 
-# Creates a craft
-craft = sphere(make_trail=True)
-craft.v = vector(0,sqrt(G * Earth.m/(mag(earth.pos)*AU2m),0) # m/s
-                 
-craft.m = mcraft
-craft.radius = 1e6 # in m
-craft.pos = vector(0,10 * Earth.radius,0)
-craft.p = craft.m * craft.v # Momentum
+# momentum = arrow()
+# momentum.color = color.green
+#
+# force = arrow()
+# force.color = color.magenta
+# a)
+#craft.v0        = vector(0, sqrt(G * earth.m/(mag(craft.pos) * AU2m)), 0)
+craft.p         = craft.m * craft.v0
 
-# Creates an arrow to track momentum
-momentum = arrow()
-momentum.color = color.green
-
-# Creates an arrow to track the Net Force
-force = arrow()
-force.color = color.orange
+t   = 0
+dt  = 60
 
 while True:
-    rate(100)
+    rate(1e3)
 
-    # Updates arrow's position
-    momentum.pos = craft.pos
-    momentum.axis = Fscale * craft.p
+    r           = (craft.pos - earth.pos) * AU2m
+    rmag        = mag(r)
+    rhat        = norm(r)
 
-    # Distance
-    r =  craft.pos - Earth.pos
-    rmag = mag(r)
-    rhat = norm(r)
-    
-    # Force of gravity
-    fgrav = G * (craft.m * Earth.m)/(rmag**2) 
-    fnet  = -fgrav * rhat
+    Fmag        = G * (earth.m * craft.m)/rmag**2
+    Fnet        = -Fmag * rhat
 
-    # Updates arrow's position
-    force.pos = craft.pos
-    force.axis = Fscale2 * fnet
-    
-    # Updates craft's momentum
-    craft.p = craft.p + fnet * dt
-    # Updates craft's position
-    craft.pos = craft.pos + (craft.p/craft.m) * dt
+    craft.p     = craft.p + Fnet * dt
+    craft.pos   = craft.pos + (craft.p /craft.m/AU2m) * dt
+
+    # momentum.pos = craft.pos
+    # momentum.axis = ScaleP * craft.p
+    #
+    # force.pos = craft.pos
+    # force.axis = ScaleF * Fnet
 
     t = t + dt
+
+
+
+
+
+
+
+
