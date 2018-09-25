@@ -25,7 +25,7 @@ star2.m          = 0.5 * star.m # kg
 star2.color      = color.orange
 star2.material   = materials.emissive
 
-star2.v          = vector(0, 2*pi*AU/YinS, 0) # In m/s
+star2.v          = vector(0, 2*pi*AU/YinS, 0) # Velocity of the Earth in m/s
 star2.p          = star2.m * star2.v
 
 t   = 0 # Initial Time
