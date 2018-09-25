@@ -1,64 +1,54 @@
 from __future__ import division, print_function
 from visual import *
 
-mcraft = 1.5e4 # mass of craft in kg
-dt = 10 # in s
+G = 6.67e-11  # N*m2/Kg2
+MinS = 1. * 30. * 24. * 60. * 60.  # 1 month in seconds
+
+AU2m = 384e6# Distance from earth to moon
+
+# Create the objects in our program
+earth           = sphere()
+earth.pos       = vector(0, 0, 0)
+earth.radius    = 6.4e6 * 10
+earth.color     = color.white
+
+moon        = sphere(make_trail=True)
+moon.pos    = vector(AU2m, 0, 0)
+moon.radius = 1.7e6 * 10
+moon.color  = color.blue
+
+# Define the masses of our objects
+earth.m = 6e24  # Kg
+moon.m = 7.35e22  # Kg
+
+# We assume the earth is initially not moving
+earth.v = vector(0, 0, 0)
+
+# For the moon we know it takes one year to go around one orbit
+CircOrb = 2 * pi * AU2m
+moon.v = vector(0, .1 * CircOrb/MinS, 0)
+
+# Create the momentum vectors
+moon.p = earth.m * earth.v
+moon.p = moon.m * moon.v
+
 t = 0
-G = 6.7e-11 # Gravitational Constant
-
-# Creates a sphere representing Earth
-Earth = sphere()
-Earth.pos = vector(0,0,0)
-Earth.radius = 6.4e6 # in m
-Earth.m = 6e24 # in kg
-Earth.material = materials.BlueMarble
-
-moon = sphere()
-moon.pos = vector(-10 * Earth.radius,0, 0)
-moon.radius = 1.75e6 # in m
-moon.m = 7e22 # in kg
-
-# Creates a craft
-craft = sphere(make_trail=True)
-craft.v = vector(1.5e3 * cos(pi), 2e3 * cos(pi), 0) # m/s
-
-# vector(1e3*cos(pi), 2e3*sin(pi), 0) --> Elipitical Orbit
-
-craft.m = mcraft
-craft.radius = 2e6 # in m
-craft.pos = vector(10 * Earth.radius,0,0)
-craft.p = craft.m * craft.v # Momentum
+dt = MinS/1000
 
 while True:
-    rate(10000)
+    rate(1e2)
 
-    # Distance
-    r =  craft.pos - Earth.pos
+    # 1st calculate the relative position   
+    r = (moon.pos - earth.pos) * AU2m
     rmag = mag(r)
     rhat = norm(r)
 
-    r1 = craft.pos - moon.pos
-    r1mag = mag(r1)
-    r1hat = norm(r1)
-    #print("Rmag = {}".format(rmag))
-    
-    # Force of gravity
-    # Part A
-    # fgrav = G * (craft.m * Earth.m)/(rmag**2)
-    # fgrav1 = G * (craft.m * moon.m)/(r1mag**2)
-##
-    # fnet  = - (fgrav1 * r1hat)
-##
-    
-    fgrav  = G * (craft.m * Earth.m)/(rmag**2)
-    fgrav1 = G * (craft.m * moon.m)/(r1mag**2)
+    # 2nd Calculate the force magnitude
+    Fmag = G * (moon.m * earth.m)/ rmag**2
+    Fnet = -Fmag * rhat
 
-    fnet  = -(fgrav * rhat) - (fgrav1 * r1hat)
-    #print("fnet = {}".format(fnet))
-  
-    # Updates craft's momentum
-    craft.p = craft.p + fnet * dt
-    # Updates craft's position
-    craft.pos = craft.pos + (craft.p/craft.m) * dt
+    moon.p = moon.p + Fnet * dt
+    moon.pos = moon.pos + (moon.p/moon.m/AU2m) * dt
 
+    # Update the time
     t = t + dt

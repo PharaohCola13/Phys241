@@ -1,37 +1,56 @@
 from __future__ import division, print_function
 from visual import *
+from visual.graph import *
+#from visual.materials import  *
 
-dt = 10 # in s
+G       = 6.7e-11 # Nm^2/kg^2
+YinS    = 365.*24.*60.*60 # s
+AU      = 1.5e11 # m
+
+star             = sphere()
+star.pos         = vector(0,0,0)
+star.radius      = 0.1
+star.m           = 2e30
+star.color       = color.yellow
+star.opacity     = 1
+star.material    = materials.emissive
+
+star.v0          = vector(0,0,0)
+star.p           = star.m * star.v0
+
+star2            = sphere(pps=10,trail_radius=1, make_trail = True)
+star2.pos        = vector(0, 0, 1)
+star2.radius     = 0.1
+star2.m          = 0.5 * star.m
+star2.color      = color.orange
+star2.material   = materials.emissive
+
+star2.v          = vector(0, (2 * pi * AU) / YinS, 0)
+star2.p          = star2.m * star2.v
+
+
 t = 0
-G = 6.7e-11 # Gravitational Constant
+dt = YinS/10000
+#dt = 1
 
-Sun             = sphere()
-Sun.pos         = vector(0,0,0)
-Sun.m           = 2e30
-Sun.radius      = 6.9e10
-Sun.color       = color.yellow
-Sun.material    = materials.emissive
-
-Mars            = sphere(make_trail=True)
-Mars.pos        = vector(20.3e10,0,0)
-Mars.m          = 6.4e23 # in kg
-Mars.radius     = 3.39e10 # in m
-Mars.color      = color.red
-
-Mars.v          = vector(50e3*cos(pi),50e3*cos(pi),0)
-Mars.p          = Mars.m * Mars.v
 while True:
-    rate(1000000)
+    rate(1e15)
+    r = (star2.pos - star.pos)*AU
+    rmag = mag(r)
+    rhat = norm(r)
+    Fmag = G*(star.m * star2.m)/rmag**2
+    Fnet = -Fmag * rhat
 
-    r       = Mars.pos - Sun.pos
-    rmag    = mag(r)
-    rhat    = norm(r)
+    rsun = (star.pos - star2.pos) * AU
+    rsun_mag = mag(rsun)
+    rsun_hat = norm(rsun)
+    Fsun = G * (star.m * star2.m) / rsun_mag**2
+    Fsun_net = -Fsun * rsun_hat
 
-    fgrav   = G * (Sun.m * Mars.m)/rmag**2
+    star2.p = star2.p + Fnet * dt
+    star2.pos = star2.pos + (star2.p/star2.m/AU) * dt
 
-    fnet    = -fgrav * rhat
+    star.p = star.p + Fsun_net * dt
+    star.pos = star.pos + (star.p/star.m/AU) * dt
 
-    Mars.p  = Mars.p + fnet * dt
-    Mars.pos = Mars.pos + (Mars.p/Mars.m)*dt
-
-    t = t + dt
+    t= t + dt

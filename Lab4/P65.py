@@ -14,7 +14,7 @@ Earth = sphere()
 Earth.pos = vector(0,0,0)
 Earth.radius = 6.4e6 # in m
 Earth.m = 6e24 # in kg
-Earth.material = materials.BlueMarble
+Earth.material = materials.earth
 
 # Creates a craft
 craft = sphere(make_trail=True)
