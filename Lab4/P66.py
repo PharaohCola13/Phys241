@@ -33,7 +33,7 @@ craft.radius = 0.01
 craft.color = color.white
 
 craft.m = 1.5e4  # kg
-craft.v = 0.75 * vector(0, sqrt(G * (1.8 * earth.m + moon.m) / (mag(craft.pos) * D)), 0)
+craft.v = vector(0, sqrt(G * (1.1 * earth.m - moon.m) / (mag(craft.pos) * D)), 0)
 
 
 # Orbits both Earth and Moon
@@ -51,9 +51,15 @@ while True:
     rmag = mag(r)
     rhat = norm(r)
 
+    r1 = (craft.pos - moon.pos) * D
+    rmag1 = mag(r1)
+    rhat1 = norm(r1)
+
     # Gravitational Force
     Fmag = G * (earth.m * craft.m) /rmag**2
-    Fnet = -(Fmag * rhat)
+    Fmag1 = G * (moon.m * craft.m)/rmag1**2
+
+    Fnet = -(Fmag * rhat) - (Fmag1 * rhat1)
 
     # Update Momentum of craft
     craft.p = craft.p + Fnet * dt
