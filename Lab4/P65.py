@@ -15,7 +15,7 @@ earth.radius    = 0.1
 earth.material  = materials.earth
 
 earth.v        = vector(0, 0, 0)
-earth.m         = 6e24  # kg
+earth.m         = 6e24  # in kg
 earth.p         = earth.m * earth.v
 
 craft           = sphere(make_trail=True)
@@ -23,7 +23,7 @@ craft.pos       = vector(1, 0, 0)
 craft.radius    = 0.01
 craft.color     = color.white
 
-craft.m         = 1.5e4 # kg
+craft.m         = 1.5e4 # in kg
 
 # Circular Orbit
 #craft.v        = vector(0, sqrt(G * earth.m/(mag(craft.pos) * D)), 0)

@@ -10,7 +10,7 @@ AU      = 1.5e11 # Distance from Earth to the sun in meters
 star             = sphere(make_trail=True)
 star.pos         = vector(0,0,0)
 star.radius      = 0.1
-star.m           = 2e30 # kg
+star.m           = 2e30 # in kg
 star.color       = color.yellow
 star.material    = materials.emissive
 
@@ -21,7 +21,7 @@ star.p           = star.m * star.v0
 star2            = sphere(make_trail = True)
 star2.pos        = vector(1, 0, 0)
 star2.radius     = 0.1
-star2.m          = 0.5 * star.m # kg
+star2.m          = 0.5 * star.m # in kg
 star2.color      = color.orange
 star2.material   = materials.emissive
 
