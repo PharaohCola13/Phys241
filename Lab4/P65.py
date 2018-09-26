@@ -3,7 +3,7 @@ from __future__ import print_function, division
 from visual import *
 
 # Declare constants
-D       = 6.4e7 # 10 times the radius of the Earth
+D       = 6.4e7 # 10 times the radius of the Earth in meters
 G       = 6.7e-11  # Nm2/kg2
 ScaleP = 1e-8 # Scalar factor for the momentum arrow
 ScaleF = 1e-4 # Scalar factor for the force arrow
