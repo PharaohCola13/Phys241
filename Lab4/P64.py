@@ -8,7 +8,7 @@ Fscale1 = 4.5e4 # Scaling factor
 mcraft  = 15e3 # mass of crafts in kg
 mplanet = 6e24 # mass of planet in kg
 
-# Creates planet 
+# Creates planet
 planet              = sphere()
 planet.radius       = 6.4e6 # in meters
 planet.pos          = vector(0,0,0)
@@ -117,3 +117,37 @@ print("The force of gravity acting on craft two by the planet is {} N".format(Fn
 print("The force of gravity acting on craft three by the planet is {} N".format(Fnet3))
 print("The force of gravity acting on craft four by the planet is {} N".format(Fnet4))
 print("The force of gravity acting on craft five by the planet is {} N".format(Fnet5))
+
+# Part C
+gvector1p        = arrow()
+gvector1p.pos    = planet.pos
+gvector1p.axis   = -Fnet1
+gvector1p.color  = color.red
+
+gvector2p        = arrow()
+gvector2p.pos    = planet.pos
+gvector2p.axis   = -Fnet2
+gvector2p.color  = color.orange
+
+gvector3p        = arrow()
+gvector3p.pos    = planet.pos
+gvector3p.axis   = -Fnet3
+gvector3p.color  = color.yellow
+
+gvector4p        = arrow()
+gvector4p.pos    = planet.pos
+gvector4p.axis   = -Fnet4
+gvector4p.color  = color.green
+
+gvector5p        = arrow()
+gvector5p.pos    = planet.pos
+gvector5p.axis   = -Fnet5
+gvector5p.color  = color.cyan
+
+# Prints out the force acting on the craft
+print("-----------------------------------------------------------------")
+print("The force of gravity acting on the planet by craft one is {} N".format(Fnet1))
+print("The force of gravity acting on the planet by craft two is {} N".format(Fnet2))
+print("The force of gravity acting on the planet by craft three is {} N".format(Fnet3))
+print("The force of gravity acting on the planet by craft four is {} N".format(Fnet4))
+print("The force of gravity acting on the planet by craft five is {} N".format(Fnet5))
