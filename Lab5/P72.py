@@ -14,29 +14,29 @@ L0  = 14 # in m
 
 wall1                = box()
 wall1.pos            = vector(2 *L0, 0, 0)
-wall1.size           = vector(0.1, 5, 5)
-wall1.color          = color.green
+wall1.size           = vector(0.1, L0, L0)
+wall1.color          = color.yellow
 
 wall2               = box()
 wall2.pos            = vector(-2 *L0, 0, 0)
-wall2.size           = vector(0.1, 5, 5)
-wall2.color          = color.green
+wall2.size           = vector(0.1, L0, L0)
+wall2.color          = color.yellow
 
 ball1                = sphere()
 #ball1.pos            = vector(L0/2,0,0)
-ball1.pos 			 = vector(L0/2, 0, -L0/2)
+ball1.pos 	     = vector(L0/10, 0, 0)
 ball1.radius         = 2
-ball1.m              = 3
+ball1.m              = 30
 ball1.p              = ball1.m *vector(0, 0,0)
-ball1.color          = color.red
+ball1.color          = color.green
 
 ball2                = sphere()
 #ball2.pos            = vector(-L0/2,0,0)
-ball2.pos		     = vector(-L0/2, 0, L0/2)
+ball2.pos	     = vector(-L0/2, 0, 0)
 ball2.radius         = 2
 ball2.m              = 3
 ball2.p              = ball1.m *vector(0,0,0)
-ball2.color          = color.orange
+ball2.color          = color.green
 
 spring1              = helix()
 spring1.pos          = wall1.pos
@@ -44,7 +44,7 @@ spring1.axis         = ball1.pos - wall1.pos
 spring1.thickness    = 0.3
 spring1.radius       = 1
 spring1.coils        = 10
-spring1.color        = color.blue
+spring1.color        = color.orange
 
 spring2              = helix()
 spring2.pos          = ball2.pos
@@ -52,7 +52,7 @@ spring2.axis         = ball1.pos - ball2.pos
 spring2.thickness    = 0.3
 spring2.radius       = 1
 spring2.coils        = 10
-spring2.color        = color.blue
+spring2.color        = color.cyan
 
 spring3              = helix()
 spring3.pos          = wall2.pos
@@ -60,7 +60,7 @@ spring3.axis         = ball2.pos - wall2.pos
 spring3.thickness    = 0.3
 spring3.radius       = 1
 spring3.coils        = 10
-spring3.color        = color.blue
+spring3.color        = color.magenta
 
 t   = 0
 dt  = 0.001
@@ -70,15 +70,15 @@ f1 = gcurve(gdisplay = gd1, color=color.white) # Define functions to plot
 
 while True:
 	rate(100)
-
+	
 	s           = L0 - mag(ball1.pos)
-	#Fspring 	 = -k * s * norm(ball1.pos)
-	Fspring     = -k * s * vector(0,0,1)
+	Fspring 	 = -k * s * norm(ball1.pos)
+	#Fspring     = -k * s * vector(0,0,1)
 	Fnet        = Fspring
 
 	s2           = L0 - mag(ball2.pos)
-	#Fspring 	 = k * s2 * norm(ball2.pos)
-	Fspring2     = k * s2 * vector(0, 0, 1)
+	Fspring2 	 = k * s2 * norm(ball2.pos)
+	#Fspring2     = k * s2 * vector(0, 0, 1)
 	Fnet2        = Fspring2
 
 
@@ -94,6 +94,6 @@ while True:
 	spring2.axis = ball1.pos - ball2.pos
 	spring3.axis = ball2.pos - wall2.pos
 
-	f1.plot(pos=(t, ball1.pos.z))  # Plots position vs time
+	f1.plot(pos=(t, ball1.pos.x))  # Plots position vs time
 
 	t = t + dt
