@@ -1,7 +1,5 @@
 from __future__ import division, print_function
 from visual import *
-from visual.graph import *
-
 
 k = 30 #in N/m
 L0 = 0.50 # in meters
@@ -36,7 +34,8 @@ ball.pos    = vector(-0.1,0, 0)
 ball.radius = 0.1
 ball.m      = 0.03
 ball.color  = color.magenta
-ball.p      = ball.m * vector(0.4, 0.4,0.4)
+ball.p      = ball.m * vector(0,0,0)
+#ball.p      = ball.m * vector(pi, pi,pi)
 
 spring1 			 = helix()
 spring1.pos          = wall1.pos
@@ -100,7 +99,6 @@ while True:
 	ball.pos   = ball.pos + ball.p/ball.m * dt
 
 	spring1.axis = ball.pos - wall1.pos
-	#print(spring1.axis)
 	spring2.axis = ball.pos - wall2.pos
 	spring3.axis = ball.pos - wall3.pos
 	spring4.axis = ball.pos - wall4.pos
