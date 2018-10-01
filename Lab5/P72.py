@@ -4,9 +4,14 @@ from visual.graph import *
 
 # Creates the graphical display for position
 gd1 = gdisplay(x=550,y=0,width=700,height=500,
-			   title='Position of ball1',
+			   title='Position of ball1 and ball2',
 			   xtitle='Time [s]',
 			   ytitle='Position [m]')
+
+gd2 = gdisplay(x=1100,y=0,width=700,height=500,
+			   title='Momentum of ball1 and ball2',
+			   xtitle='Time [s]',
+			   ytitle='Momentum [kg m/s]')
 
 
 k   = 50 # in N/m
@@ -24,18 +29,19 @@ wall2.color          = color.yellow
 
 ball1                = sphere()
 #ball1.pos            = vector(L0/2,0,0)
-ball1.pos 	     = vector(L0/10, 0, 0)
+ball1.pos 	     	 = vector(L0/2, L0/2, 0)
 ball1.radius         = 2
-ball1.m              = 30
-ball1.p              = ball1.m *vector(0, 0,0)
-ball1.color          = color.green
+ball1.m              = 3
+ball1.p              = ball1.m *vector(0, -10, 0)
+ball1.color          = color.orange
 
 ball2                = sphere()
 #ball2.pos            = vector(-L0/2,0,0)
-ball2.pos	     = vector(-L0/2, 0, 0)
+ball2.pos	    	 = vector(-L0/2, -L0/2, 0)
 ball2.radius         = 2
 ball2.m              = 3
-ball2.p              = ball1.m *vector(0,0,0)
+#ball2.p 			 = ball2.m *vector(0, 0, 0)
+ball2.p              = ball2.m *vector(0,10,0)
 ball2.color          = color.green
 
 spring1              = helix()
@@ -63,9 +69,10 @@ spring3.coils        = 10
 spring3.color        = color.magenta
 
 t   = 0
-dt  = 0.001
+dt  = 0.01
 
-f1 = gcurve(gdisplay = gd1, color=color.white) # Define functions to plot
+f1 = gcurve(gdisplay = gd1) # Define functions to plot
+f2 = gcurve(gdisplay = gd2) # Define functions to plot
 
 
 while True:
@@ -75,6 +82,8 @@ while True:
 	Fspring 	 = -k * s * norm(ball1.pos)
 	#Fspring     = -k * s * vector(0,0,1)
 	Fnet        = Fspring
+
+	print(norm(ball1.pos))
 
 	s2           = L0 - mag(ball2.pos)
 	Fspring2 	 = k * s2 * norm(ball2.pos)
@@ -94,6 +103,9 @@ while True:
 	spring2.axis = ball1.pos - ball2.pos
 	spring3.axis = ball2.pos - wall2.pos
 
-	f1.plot(pos=(t, ball1.pos.x))  # Plots position vs time
+	f1.plot(pos=(t, ball1.pos.y), color=ball1.color)  # Plots position vs time
+	f1.plot(pos=(t, ball2.pos.y), color=ball2.color)  # Plots position vs time
+	f2.plot(pos=(t, ball1.p.x), color=ball1.color)  # Plots position vs time
+	f2.plot(pos=(t, ball2.p.x), color=ball2.color)  # Plots position vs time
 
 	t = t + dt
