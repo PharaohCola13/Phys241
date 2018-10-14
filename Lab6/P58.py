@@ -13,6 +13,7 @@ base.pos            = vector(0,0,0)
 base.color          = color.green
 
 block               = sphere(make_trail=True)
+#block.pos           = vector(0, -0.418, 0)
 block.pos           = vector(0.1, -0.1, 0)
 
 block.radius        = 0.025
@@ -66,8 +67,6 @@ while True:
 	fgrav = block.m * g * vector(0, -1, 0)
 	fpara = dot(Fnet, norm(block.p)) * norm(block.p)
 	fortho = Fnet - fpara
-
-	print(fortho)
 
 	fnet.pos    = block.pos
 	fnet.axis   = Fnet
