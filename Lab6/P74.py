@@ -12,10 +12,12 @@ base.pos            = vector(0,-0.1,0)
 base.color          = color.green
 
 ball                = sphere(make_trail=True)
-ball.pos            = vector(0.1, 0, 0.1)
+#ball.pos            = vector(0.1, 0, 0.1)
+ball.pos            = vector(0.5, 0, 0.1)
 ball.radius         = 0.025
 ball.m              = 0.2
-ball.p              = ball.m * vector(1,0,-0.6)
+ball.p              = ball.m * vector(0.1, 0, 0.02)
+#ball.p              = ball.m * vector(1,0,-0.6)
 ball.color          = color.cyan
 
 rod                 = cylinder()
