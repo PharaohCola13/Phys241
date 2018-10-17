@@ -12,8 +12,12 @@ base.pos            = vector(0,0,0)
 base.color          = color.green
 
 block               = sphere(make_trail=True)
+#Fpara = 0
 #block.pos           = vector(0, -0.418, 0)
-block.pos           = vector(0.1, -0.1, 0)
+#Fpara and Fortho != 0
+#block.pos           = vector(0.1, -0.1, 0)
+#Fortho = 0
+block.pos			= vector(0, -0.1, 0)
 
 block.radius        = 0.025
 block.m             = 0.02 # in kg

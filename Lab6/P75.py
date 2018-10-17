@@ -50,7 +50,7 @@ dt = 0.01
 
 f1 = gcurve(gdisplay = gd1, color=color.white) # Define functions to plot
 
-while t < 2000 * dt:
+while t < 100 * dt:
     try:
         rate(100)
 # Spring Force
