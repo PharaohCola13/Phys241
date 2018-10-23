@@ -53,13 +53,14 @@ while True:
 	r = (craft.pos - earth.pos)
 	rmag = mag(r)
 	rhat = norm(r)
-
+	#Distance between craft and moon
 	r1 = (craft.pos - moon.pos)
 	rmag1 = mag(r1)
 	rhat1 = norm(r1)
 
-	# Gravitational Force
+	# Gravitational Force of Earth-craft system
 	Fmag  = -G * (earth.m * craft.m)/rmag**2
+	#Gravitational force of Moon-craft system
 	Fmag1 = -G * (moon.m * craft.m)/rmag1**2
 
 	# Net force
@@ -71,11 +72,16 @@ while True:
 	# Update Position of craft
 	craft.pos = craft.pos + (craft.p/craft.m) * dt
 
+	#Calculates the Kinetic Energy
 	K = 0.5 * (mag(craft.p)**2 / craft.m)
+	#Calculates the gravitational potential energy
 	U = (-G * (earth.m * craft.m)/rmag) + (-G * (moon.m * craft.m)/rmag1)
 
-	Kplot.plot(pos=(t, K))
-	Uplot.plot(pos=(t, U))
-	Kplusplot.plot(pos=(t, K + U))
-
+	#Plot Kinetic Energy as a function of the displacement
+	Kplot.plot(pos=(rmag, K))
+	#Plot Gravitational Potential energy as a function of displacement
+	Uplot.plot(pos=(rmag, U))
+	#Ploy the sum of both Kinetic and potential energies as a function of displacement
+	Kplusplot.plot(pos=(rmag, K + U))
+	# Update Time
 	t = t + dt

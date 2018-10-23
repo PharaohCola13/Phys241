@@ -71,11 +71,17 @@ while True:
 	# Update Position of craft
 	craft.pos = craft.pos + (craft.p/craft.m) * dt
 
+
+	#Calculates the Kinetic Energy
 	K = 0.5 * (mag(craft.p)**2 / craft.m)
+	#Calculates the gravitational potential energy
 	U = (-G * (earth.m * craft.m)/rmag) + (-G * (moon.m * craft.m)/rmag1)
 
+	#Plot Kinetic Energy as a function of the displacement
 	Kplot.plot(pos=(t, K))
+	#Plot Gravitational Potential energy as a function of displacement
 	Uplot.plot(pos=(t, U))
+	#Ploy the sum of both Kinetic and potential energies as a function of displacement
 	Kplusplot.plot(pos=(t, K + U))
-
+	# Update Time
 	t = t + dt
