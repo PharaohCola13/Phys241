@@ -17,7 +17,7 @@ Kplusplot = gcurve(display= graph1, color=color.blue)
 
 k   = 0.9 # in N/m
 L0  = 0.20 # in m
-g   = 9.81
+g   = 9.81 # in m/s^2
 
 base                = box()
 base.size           = vector(0.2, 0.01, 0.2)
@@ -41,8 +41,9 @@ spring.radius       = 0.01
 spring.coils        = 40
 
 fgrav = block.m * g * vector(0,-1,0)
-
+# Initial Time
 t   = 0
+# Time Step
 dt  = 0.001
 
 f1 = gcurve(gdisplay = gd1, color=color.white) # Define functions to plot
@@ -50,21 +51,24 @@ f1 = gcurve(gdisplay = gd1, color=color.white) # Define functions to plot
 
 while True:
 	rate(100)
-
+# Spring Force
 	s           = mag(block.pos) - L0
 	Fspring     = -k * s * norm(block.pos)
 	Fnet        = fgrav + Fspring
-
+# Updates block momentum
 	block.p     = block.p + Fnet*dt
+# Updates block position
 	block.pos   = block.pos + block.p/block.m * dt
-
+# Updates spring final position
 	spring.axis = block.pos - base.pos
+
 	f1.plot(pos=(t, block.pos.y))  # Plots position vs time
 
 	# Calculates the Kinetic Energy
 	K = 0.5 * (mag(block.p) ** 2 / block.m)
 	# Calculates the gravitational potential energy
 	U = 0.5 * k * s**2
+
 	# Plot Kinetic Energy as a function of the displacement
 	Kplot.plot(pos=(t, K))
 	# Plot Gravitational Potential energy as a function of displacement
@@ -72,10 +76,10 @@ while True:
 	# Ploy the sum of both Kinetic and potential energies as a function of displacement
 	Kplusplot.plot(pos=(t, K + U))
 	# Update Time
+	t = t + dt
 
 # a #K+U is not constant over time
 
 # b #As the mass drops, the blue and red lines increase, while the green line decreases.
 
 # c #As the kinetic energy increases the potential energy decreases at about the same amplitude, causing the sum to have little variation.
-	t = t + dt
