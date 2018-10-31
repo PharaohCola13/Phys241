@@ -3,10 +3,13 @@ from __future__ import division, print_function
 from visual import *
 from visual.graph import *
 
-graph1 = gdisplay(title="Spring Energies", x=0, y=400, width=400, height=400)
+graph1 = gdisplay(title="Spring Energies", x=0, y=400, width=800, height=400, xtitle="Time [t]", ytitle="Energy [J]")
 Kplot = gcurve(gdisplay = graph1, color=color.green)
+label(display=graph1.display, pos=(0,0.02),color=color.green, text="Kinetic Energy")
 Uplot = gcurve(gdisplay = graph1, color=color.red)
+label(display=graph1.display, pos=(0,0.01),color=color.red, text="Potential Energy")
 Kplusplot = gcurve(display= graph1, color=color.blue)
+label(display=graph1.display, pos=(0,0),color=color.blue, text="Total Energy")
 
 
 
