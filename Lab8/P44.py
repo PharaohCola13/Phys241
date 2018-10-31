@@ -2,12 +2,7 @@ from __future__ import division, print_function
 from visual import *
 from visual.graph import *
 
-# Creates the graphical display for position
-gd1 = gdisplay(x=550,y=0,width=700,height=500,
-			   title='Position of block',
-			   xtitle='Time [s]',
-			   ytitle='Position [m]')
-
+# Creates the graphical display for Energies
 graph1 = gdisplay(title="Spring Energies", x=0, y=400, width=400, height=400)
 Kplot = gcurve(gdisplay = graph1, color=color.green)
 Uplot = gcurve(gdisplay = graph1, color=color.red)
@@ -46,8 +41,6 @@ t   = 0
 # Time Step
 dt  = 0.001
 
-f1 = gcurve(gdisplay = gd1, color=color.white) # Define functions to plot
-
 
 while True:
 	rate(100)
@@ -62,8 +55,6 @@ while True:
 # Updates spring final position
 	spring.axis = block.pos - base.pos
 
-	f1.plot(pos=(t, block.pos.y))  # Plots position vs time
-
 	# Calculates the Kinetic Energy
 	K = 0.5 * (mag(block.p) ** 2 / block.m)
 	# Calculates the gravitational potential energy
@@ -77,9 +68,3 @@ while True:
 	Kplusplot.plot(pos=(t, K + U))
 	# Update Time
 	t = t + dt
-
-# a #K+U is not constant over time
-
-# b #As the mass drops, the blue and red lines increase, while the green line decreases.
-
-# c #As the kinetic energy increases the potential energy decreases at about the same amplitude, causing the sum to have little variation.

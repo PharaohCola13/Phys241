@@ -2,12 +2,7 @@ from __future__ import division, print_function
 from visual import *
 from visual.graph import *
 
-# Creates the graphical display for position
-gd1 = gdisplay(x=550,y=0,width=700,height=500,
-			   title='Position of block',
-			   xtitle='Time [s]',
-			   ytitle='Position [m]')
-
+# Creates the graphical display for Energy
 graph1 = gdisplay(title="Spring Energies", x=0, y=400, width=400, height=400)
 Kplot = gcurve(gdisplay = graph1, color=color.green)
 Uplot = gcurve(gdisplay = graph1, color=color.red)
@@ -48,8 +43,6 @@ t   = 0
 # Time Step
 dt  = 0.001
 
-f1 = gcurve(gdisplay = gd1, color=color.white) # Define functions to plot
-
 # Stuff needed for Frictional Force
 A  = pi * block.radius**2 # Cross sectional area in m^2
 rho = 1.225 # Density of Air in
@@ -71,9 +64,6 @@ while True:
 # Updates Spring final position
 	spring.axis = block.pos - base.pos
 
-	f1.plot(pos=(t, block.pos.y))  # Plots position vs time
-
-
 # Calculates the Kinetic Energy
 	K = 0.5 * (mag(block.p) ** 2 / block.m)
 # Calculates the gravitational potential energy
@@ -89,5 +79,3 @@ while True:
 # Update Time
 	t = t + dt
 
-# The rate of dissipation is not constant, there is a larger rate of dissipation towards the initial time
-# As time progresses there is less available energy

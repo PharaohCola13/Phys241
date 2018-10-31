@@ -25,8 +25,8 @@ block.color  = color.magenta
 block.p      = block.m * vector(0,0,0)
 
 spring 			 	= helix()
-spring.pos          = wall1.pos
-spring.axis         = block.pos - wall1.pos
+spring.pos          = wall.pos
+spring.axis         = block.pos - wall.pos
 spring.thickness    = 0.05
 spring.radius       = 0.3
 spring.coils        = 5
@@ -47,8 +47,8 @@ coeff = 0.15
 Fnorm = g * block.m
 Ffmag = coeff * Fnorm
 
-while True:
-	rate(1e6)
+while t <= 3000 * dt:
+	rate(1e2)
 # Spring Force
 	s 		=  L0 - mag(block.pos)
 	Fspring = k * s * norm(block.pos)
@@ -58,14 +58,15 @@ while True:
 	Ff      = Ffmag * norm(block.p)
 
 # Net Force
-	Fnet 	=  Fspring - Ff
-
+#	Fnet 	= Fspring
+#	Fnet 	=  Fspring - Ff
+	Fnet 	= Fspring - Fdrag
 # Updates Block momentum
 	block.p     = block.p + Fnet*dt
 	block.pos   = block.pos + block.p/block.m * dt
 
 # Updates Spring final position
-	spring.axis = block.pos - wall1.pos
+	spring.axis = block.pos - wall.pos
 
 # Calculates the Kinetic Energy
 	K = 0.5 * (mag(block.p) ** 2 / block.m)
