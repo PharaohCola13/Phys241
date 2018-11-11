@@ -4,7 +4,13 @@ from visual import *
 from visual.graph import *
 
 # Creates the graphical display for Energy
-#graph1 = gdisplay(title="Spring Energies", x=0, y=400, width=800, height=400, xtitle="Time [t]", ytitle="Energy [J]")
+graph1 = gdisplay(title="Trajectories", x=0, y=400, width=800, height=400, xtitle="Positon in X [km]", ytitle="Position in Y [km]")
+angle30 = gcurve(display= graph1, color=color.orange)
+angle35 = gcurve(display= graph1, color=color.green)
+angle40 = gcurve(display= graph1, color=color.blue)
+angle45 = gcurve(display= graph1, color=color.magenta)
+angle50 = gcurve(display= graph1, color=color.cyan)
+angle55 = gcurve(display= graph1, color=color.red)
 
 g = 9.81
 x_axis = arrow()
@@ -25,23 +31,11 @@ z_axis.color = color.yellow
 angles = [30, 35, 40, 45, 50, 55] # in degrees
 
 for i in angles:
-	cannon = sphere()
+	cannon = sphere(make_trail=True)
 	cannon.radius = 1000
 	cannon.pos = vector(0, 0, 0)
 	cannon.m = 10  # in kg
-	if i == 30:
-		cannon.color = color.orange
-	elif i == 35:
-		cannon.color = color.green
-	elif i == 40:
-		cannon.color = color.blue
-	elif i == 45:
-		cannon.color = color.magenta
-	elif i == 50:
-		cannon.color = color.cyan
-	elif i == 55:
-		cannon.color = color.red
-
+	
 	cannon.v = 700 * vector(cos(radians(i)), sin(radians(i)), cos(radians(90)))  # in m/s
 	cannon.p = cannon.v * cannon.m
 	Fgrav = cannon.m * vector(0, -g, 0)
@@ -62,15 +56,33 @@ for i in angles:
 	dt = 0.1
 
 	while True:
-		rate(1000)
+			rate(1000)
 
-		if cannon.pos.y < 0.0:
-			break
+			if cannon.pos.y < 0.0:
+				break
+			if i == 30:
+				cannon.color = color.orange
+				#angle30.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
+			elif i == 35:
+				cannon.color = color.green
+				angle35.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
+			elif i == 40:
+				cannon.color = color.blue
+				#angle40.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
+			elif i == 45:
+				cannon.color = color.magenta
+				angle45.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
+			elif i == 50:
+				cannon.color = color.cyan
+				#angle50.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
+			elif i == 55:
+				cannon.color = color.red
+				#angle55.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
 
-		cannon.p = cannon.p + Fnet * dt
-		cannon.v = (cannon.p/cannon.m)
-		cannon.pos = cannon.pos + cannon.v * dt
+			cannon.p = cannon.p + Fnet * dt
+			cannon.v = (cannon.p/cannon.m)
+			cannon.pos = cannon.pos + cannon.v * dt
 
-		t = t + dt
+			t = t + dt
 
 	t = t + dt
