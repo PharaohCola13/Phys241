@@ -4,15 +4,15 @@ from visual import *
 from visual.graph import *
 
 # Creates the graphical display for Energy
-graph1 = gdisplay(title="Trajectories with Varying Spin", x=0, y=400, width=800, height=400, xtitle="Time [t]", ytitle="Position [m]")
+graph1 = gdisplay(title="Trajectories with Varying Spin", x=0, y=400, width=800, height=400, xtitle="Position in X [m]", ytitle="Position in Y [m]")
 senone = gcurve(display= graph1, color=color.blue)
-label(display=graph1.display, pos=(0,0),color=color.blue, text="No spin")
+label(display=graph1.display, pos=(300,50),color=color.blue, text="No spin")
 sentwo = gcurve(display= graph1, color=color.green)
-label(display=graph1.display, pos=(0,40),color=color.green, text="Normal Spin")
+label(display=graph1.display, pos=(300,60),color=color.green, text="Normal Spin")
 senthree = gcurve(display= graph1, color=color.red)
-label(display=graph1.display, pos=(0,60),color=color.red, text="50% More Spin")
+label(display=graph1.display, pos=(300,70),color=color.red, text="50% More Spin")
 senfour = gcurve(display= graph1, color=color.magenta)
-label(display=graph1.display, pos=(0,10),color=color.magenta, text="C = 0.5")
+label(display=graph1.display, pos=(300,80),color=color.magenta, text="C = 0.5")
 
 g = 9.81
 x_axis = arrow()
@@ -33,7 +33,7 @@ z_axis.color = color.yellow
 senario = [0, 0.25, 1.5 * 0.25, "Four"]
 
 for i in senario:
-	cannon = sphere()
+	cannon = sphere(make_trail=True)
 	cannon.radius = 1
 	cannon.pos = vector(0, 0, 0)
 	cannon.m = 0.04  # in kg
@@ -65,7 +65,7 @@ for i in senario:
 		cannon.pos = cannon.pos + cannon.v * dt
 
 		# Plot Kinetic Energy as a function of the displacement
-		senone.plot(pos=(t, cannon.pos.y))
+		senone.plot(pos=(cannon.pos.x, cannon.pos.y))
 
 		t = t + dt
 
@@ -89,7 +89,7 @@ for i in senario:
 
 
 	# Plot Kinetic Energy as a function of the displacement
-		sentwo.plot(pos=(t, cannon.pos.y))
+		sentwo.plot(pos=(cannon.pos.x, cannon.pos.y))
 
 		t = t + dt
 	while i == senario[2]:
@@ -112,7 +112,7 @@ for i in senario:
 
 
 	# Plot Kinetic Energy as a function of the displacement
-		senthree.plot(pos=(t, cannon.pos.y))
+		senthree.plot(pos=(cannon.pos.x, cannon.pos.y))
 
 		t = t + dt
 	while i == senario[3]:
@@ -135,10 +135,6 @@ for i in senario:
 		cannon.pos = cannon.pos + cannon.v * dt
 
 		# Plot Kinetic Energy as a function of the displacement
-		senfour.plot(pos=(t, cannon.pos.y))
+		senfour.plot(pos=(cannon.pos.x, cannon.pos.y))
 
 		t = t + dt
-
-
-
-
