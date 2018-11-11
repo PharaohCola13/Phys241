@@ -4,13 +4,13 @@ from visual import *
 from visual.graph import *
 
 # Creates the graphical display for Energy
-graph1 = gdisplay(title="Wind Speed Trajectories", x=0, y=400, width=800, height=400, xtitle="Time [t]", ytitle="Position [m]")
-windzero = gcurve(display= graph1, color=color.blue)
-label(display=graph1.display, pos=(0,0),color=color.blue, text="0 mph")
+graph1 = gdisplay(title="Wind Speed Trajectories", x=0, y=400, width=800, height=400, xtitle="Position in X [m]", ytitle="Position in Y [m]")
+windzero = gcurve(display= graph1, color=color.cyan)
+label(display=graph1.display, pos=(-75,5),color=color.cyan, text="0 mph")
 windhead = gcurve(display= graph1, color=color.green)
-label(display=graph1.display, pos=(0,2),color=color.green, text="10 mph")
+label(display=graph1.display, pos=(-75,7.5),color=color.green, text="10 mph")
 windtail = gcurve(display= graph1, color=color.red)
-label(display=graph1.display, pos=(0,-2),color=color.red, text="-10 mph")
+label(display=graph1.display, pos=(-75,2.5),color=color.red, text="-10 mph")
 g = 9.81
 x_axis = arrow()
 x_axis.pos = vector(0,0,0)
@@ -56,13 +56,13 @@ for i in wind:
 
         if baseball.pos.y < 0.0:
             break
-        baseball.color = color.blue
+        baseball.color = color.cyan
         baseball.p = baseball.p + Fnet * dt
         baseball.v = (baseball.p/baseball.m)
         baseball.pos = baseball.pos + baseball.v * dt
 
         # Plot Kinetic Energy as a function of the displacement
-        windzero.plot(pos=(t,baseball.pos.y))
+        windzero.plot(pos=(baseball.pos.x,baseball.pos.y))
 
         t = t + dt
     while i == wind[1]:
@@ -76,7 +76,7 @@ for i in wind:
         baseball.pos = baseball.pos + baseball.v * dt
 
         # Plot Kinetic Energy as a function of the displacement
-        windhead.plot(pos=(t, baseball.pos.y))
+        windhead.plot(pos=(baseball.pos.x, baseball.pos.y))
 
         t = t + dt
     while i == wind[2]:
@@ -90,6 +90,6 @@ for i in wind:
         baseball.pos = baseball.pos + baseball.v * dt
 
         # Plot Kinetic Energy as a function of the displacement
-        windtail.plot(pos=(t, baseball.pos.y))
+        windtail.plot(pos=(baseball.pos.x, baseball.pos.y))
 
         t = t + dt
