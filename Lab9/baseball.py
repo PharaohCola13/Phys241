@@ -31,7 +31,7 @@ z_axis.color = color.yellow
 wind = [0, 4.4704, -4.4704]
 
 for i in wind:
-    baseball = sphere()
+    baseball = sphere(make_trail=True)
     baseball.radius = 1
     baseball.pos = vector(0, 1, 0)
     baseball.m = 0.150  # in kg
@@ -56,7 +56,7 @@ for i in wind:
 
         if baseball.pos.y < 0.0:
             break
-
+        baseball.color = color.blue
         baseball.p = baseball.p + Fnet * dt
         baseball.v = (baseball.p/baseball.m)
         baseball.pos = baseball.pos + baseball.v * dt
@@ -70,7 +70,7 @@ for i in wind:
 
         if baseball.pos.y < 0.0:
             break
-
+        baseball.color = color.green
         baseball.p = baseball.p + Fnet * dt
         baseball.v = (baseball.p / baseball.m)
         baseball.pos = baseball.pos + baseball.v * dt
@@ -84,7 +84,7 @@ for i in wind:
 
         if baseball.pos.y < 0.0:
             break
-
+        baseball.color = color.red
         baseball.p = baseball.p + Fnet * dt
         baseball.v = (baseball.p / baseball.m)
         baseball.pos = baseball.pos + baseball.v * dt
