@@ -4,89 +4,141 @@ from visual import *
 from visual.graph import *
 
 # Creates the graphical display for Energy
-graph1 = gdisplay(title="Spring Energies", x=0, y=400, width=800, height=400, xtitle="Time [t]", ytitle="Energy [J]")
-windzero = gcurve(display= graph1, color=color.blue)
-windhead = gcurve(display= graph1, color=color.green)
-windtail = gcurve(display= graph1, color=color.red)
+graph1 = gdisplay(title="Trajectories with Varying Spin", x=0, y=400, width=800, height=400, xtitle="Time [t]", ytitle="Position [m]")
+senone = gcurve(display= graph1, color=color.blue)
+label(display=graph1.display, pos=(0,0),color=color.blue, text="No spin")
+sentwo = gcurve(display= graph1, color=color.green)
+label(display=graph1.display, pos=(0,40),color=color.green, text="Normal Spin")
+senthree = gcurve(display= graph1, color=color.red)
+label(display=graph1.display, pos=(0,60),color=color.red, text="50% More Spin")
+senfour = gcurve(display= graph1, color=color.magenta)
+label(display=graph1.display, pos=(0,10),color=color.magenta, text="C = 0.5")
 
 g = 9.81
 x_axis = arrow()
 x_axis.pos = vector(0,0,0)
-x_axis.axis = 50 *vector(1, 0, 0)
+x_axis.axis = 60 *vector(1, 0, 0)
 x_axis.color = color.red
 
 y_axis = arrow()
 y_axis.pos = vector(0,0,0)
-y_axis.axis = 50 *vector(0, 1, 0)
+y_axis.axis = 60 *vector(0, 1, 0)
 y_axis.color = color.blue
 
 z_axis = arrow()
 z_axis.pos = vector(0,0,0)
-z_axis.axis = 50 *vector(0, 0, 1)
+z_axis.axis = 60 *vector(0, 0, 1)
 z_axis.color = color.yellow
 
+senario = [0, 0.25, 1.5 * 0.25, "Four"]
 
-wind = [0, 4.4704, -4.4704]
+for i in senario:
+	cannon = sphere()
+	cannon.radius = 1
+	cannon.pos = vector(0, 0, 0)
+	cannon.m = 0.04  # in kg
+	cannon.v = 70 * vector(cos(radians(9)), sin(radians(9)), cos(radians(90)))  # in m/s
 
-for i in wind:
-    cannon = sphere()
-    cannon.radius = 1
-    cannon.pos = vector(0, 1, 0)
-    cannon.m = 0.150  # in kg
-    cannon.v = 50 * vector(cos(radians(45)), sin(radians(45)), cos(radians(90)))  # in m/s
+	cannon.p = cannon.v * cannon.m
+	Fgrav = cannon.m * vector(0, -g, 0)
 
-    windv = vector(i, 0, 0)
-    cannon.p = cannon.v * cannon.m
-    Fgrav = cannon.m * vector(0, -g, 0)
+	C = 7/mag(cannon.v)
 
-    B = 0.0039 + (0.0058)/(1 + exp((mag(cannon.v) - 35)/5))
-   # Fdrag = -B * mag(cannon.v)**2 * norm(cannon.v)
+	rho = 1.225  # in kg.m^3
+	radius = 0.021335
+	A = pi * radius ** 2
 
-    Fdrag = -B * (mag(cannon.v) - mag(windv))**2 * (norm(cannon.v) - norm(windv))
+	t = 0
+	dt = 0.1
 
-    Fnet = Fgrav + Fdrag
+	while i == senario[0]:
+		rate(10)
+		cannon.color = color.blue
 
-    t = 0
-    dt = 0.1
-    while i == wind[0]:
-        rate(10)
+		if cannon.pos.y < 0.0:
+			break
+		Fdrag = -C * rho * A * mag(cannon.v) ** 2 * norm(cannon.v)
+		Fnet = Fgrav + Fdrag
 
-        if cannon.pos.y < 0.0:
-            break
+		cannon.p = cannon.p + Fnet * dt
+		cannon.v = (cannon.p / cannon.m)
+		cannon.pos = cannon.pos + cannon.v * dt
 
-        cannon.p = cannon.p + Fnet * dt
-        cannon.v = (cannon.p/cannon.m)
-        cannon.pos = cannon.pos + cannon.v * dt
+		# Plot Kinetic Energy as a function of the displacement
+		senone.plot(pos=(t, cannon.pos.y))
 
-        # Plot Kinetic Energy as a function of the displacement
-        windzero.plot(pos=(t,cannon.pos.x))
+		t = t + dt
 
-        t = t + dt
-    while i == wind[1]:
-        rate(10)
+	while i == senario[1]:
+		rate(10)
 
-        if cannon.pos.y < 0.0:
-            break
+		cannon.color = color.green
 
-        cannon.p = cannon.p + Fnet * dt
-        cannon.v = (cannon.p / cannon.m)
-        cannon.pos = cannon.pos + cannon.v * dt
+		if cannon.pos.y < 0.0:
+			break
 
-        # Plot Kinetic Energy as a function of the displacement
-        windhead.plot(pos=(t, cannon.pos.x))
+		Fdrag = -C * rho * A * mag(cannon.v) ** 2 * norm(cannon.v)
 
-        t = t + dt
-    while i == wind[2]:
-        rate(10)
+		Fmagnus = vector(-i * cannon.p.y, i * cannon.p.x, 0)
 
-        if cannon.pos.y < 0.0:
-            break
+		Fnet = Fgrav + Fdrag + Fmagnus
 
-        cannon.p = cannon.p + Fnet * dt
-        cannon.v = (cannon.p / cannon.m)
-        cannon.pos = cannon.pos + cannon.v * dt
+		cannon.p = cannon.p + Fnet * dt
+		cannon.v = (cannon.p / cannon.m)
+		cannon.pos = cannon.pos + cannon.v * dt
 
-        # Plot Kinetic Energy as a function of the displacement
-        windtail.plot(pos=(t, cannon.pos.x))
 
-        t = t + dt
+	# Plot Kinetic Energy as a function of the displacement
+		sentwo.plot(pos=(t, cannon.pos.y))
+
+		t = t + dt
+	while i == senario[2]:
+		rate(10)
+
+		cannon.color = color.red
+
+		if cannon.pos.y < 0.0:
+			break
+
+		Fdrag = -C * rho * A * mag(cannon.v) ** 2 * norm(cannon.v)
+
+		Fmagnus = vector(-i * cannon.p.y, i * cannon.p.x, 0)
+
+		Fnet = Fgrav + Fdrag + Fmagnus
+
+		cannon.p = cannon.p + Fnet * dt
+		cannon.v = (cannon.p / cannon.m)
+		cannon.pos = cannon.pos + cannon.v * dt
+
+
+	# Plot Kinetic Energy as a function of the displacement
+		senthree.plot(pos=(t, cannon.pos.y))
+
+		t = t + dt
+	while i == senario[3]:
+		rate(10)
+
+		cannon.color = color.magenta
+
+		if cannon.pos.y < 0.0:
+			break
+
+		C = 0.5
+		Fdrag = -C * rho * A * mag(cannon.v) ** 2 * norm(cannon.v)
+
+		Fmagnus = vector(-0.25 * cannon.p.y, 0.25 * cannon.p.x, 0)
+
+		Fnet = Fgrav + Fdrag + Fmagnus
+
+		cannon.p = cannon.p + Fnet * dt
+		cannon.v = (cannon.p / cannon.m)
+		cannon.pos = cannon.pos + cannon.v * dt
+
+		# Plot Kinetic Energy as a function of the displacement
+		senfour.plot(pos=(t, cannon.pos.y))
+
+		t = t + dt
+
+
+
+
