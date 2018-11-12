@@ -13,7 +13,7 @@ angle50 = gcurve(display= graph1, color=color.cyan)
 angle55 = gcurve(display= graph1, color=color.red)
 
 # Constants
-g 	= 9.81
+g 	= 9.81 # in m/s^2
 # List of angles
 angles 	= [30, 35, 40, 45, 50, 55] # in degrees
 
@@ -72,7 +72,6 @@ for i in angles:
 	t = 0 # in s
 # Time step
 	dt = 0.1 # in s
-
 	while True:
 		rate(1000)
 # Breaks loop when cannon hits floor
@@ -80,21 +79,27 @@ for i in angles:
 			break
 		if i == 30:
 			cannon.color = color.orange
+# Plots trajectory plot
 			angle30.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
 		elif i == 35:
 			cannon.color = color.green
+# Plots trajectory plot
 			angle35.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
 		elif i == 40:
 			cannon.color = color.blue
+# Plots trajectory plot
 			angle40.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
 		elif i == 45:
 			cannon.color = color.magenta
+# Plots trajectory plot
 			angle45.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
 		elif i == 50:
 			cannon.color = color.cyan
+# Plots trajectory plot
 			angle50.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
 		elif i == 55:
 			cannon.color = color.red
+# Plots trajectory plot
 			angle55.plot(pos=(cannon.pos.x/1000, cannon.pos.y/1000))
 # Updates momentum
 		cannon.p = cannon.p + Fnet * dt # in kg m/s
