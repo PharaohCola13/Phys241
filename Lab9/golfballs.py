@@ -49,7 +49,7 @@ for i in senario:
 	golfball.p 	= golfball.v * golfball.m # in kg m/s
 	Fgrav 		= golfball.m * vector(0, -g, 0) # in N
 # Drag Coefficient
-	C 	= 7/mag(golfball.v) 	# in s/m
+	C 	= 7/mag(golfball.v)
 # Air Density at sea level
 	rho 	= 1.225  		# in kg.m^3
 # Radius of golf ball, diamter: 0.04267 m
@@ -76,7 +76,7 @@ for i in senario:
 		golfball.v 	= (golfball.p / golfball.m) # in m/s
 # Update ball position
 		golfball.pos 	= golfball.pos + golfball.v * dt # in m
-
+# Plots trajectory plot
 		senone.plot(pos=(golfball.pos.x, golfball.pos.y))
 # Update Time
 		t = t + dt # in s
@@ -99,7 +99,7 @@ for i in senario:
 		golfball.v 	= (golfball.p / golfball.m) # in m/s
 # Update ball position
 		golfball.pos 	= golfball.pos + golfball.v * dt # in m
-
+# Plots trajectory plot
 		sentwo.plot(pos=(golfball.pos.x, golfball.pos.y))
 # Update Time
 		t = t + dt # in s
@@ -121,7 +121,7 @@ for i in senario:
 		golfball.v 	= (golfball.p / golfball.m) # in m/s
 # Update ball position
 		golfball.pos 	= golfball.pos + golfball.v * dt # in m
-
+# Plots trajectory plot
 		senthree.plot(pos=(golfball.pos.x, golfball.pos.y))
 # Update Time
 		t = t + dt # in s
@@ -132,7 +132,7 @@ for i in senario:
 		if cannon.pos.y < 0.0:
 			break
 # Coefficient of Drag
-		C 	= 0.5 # in s/m
+		C 	= 0.5
 # Force of Drag
 		Fdrag 	= -C * rho * A * mag(golfball.v)** 2 * norm(golfball.v) # in N
 # Magnus Force
@@ -145,7 +145,7 @@ for i in senario:
 		golfball.v 	= (golfball.p / golfball.m) # in m/s
 # Update ball position
 		golfball.pos 	= golfball.pos + golfball.v * dt # in m
-
+# Plots trajectory plot
 		senfour.plot(pos=(golfball.pos.x, golfball.pos.y))
 # Update Time
 		t = t + dt # in s
