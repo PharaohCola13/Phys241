@@ -6,17 +6,17 @@ from visual.graph import *
 # Creates the graphical display for the trajectory of each scenario
 graph1 		= gdisplay(title="Trajectories with Varying Spin", x=0, y=400, width=800, height=400, xtitle="Position in X [m]", ytitle="Position in Y [m]")
 senone 		= gcurve(display= graph1, color=color.cyan)
-label(display=graph1.display, pos=(300,50),color=color.cyan, text="No spin")
+label(display=graph1.display, pos=(300,50),color=color.cyan, text="No spin, C = 0.1")
 sentwo 		= gcurve(display= graph1, color=color.green)
-label(display=graph1.display, pos=(300,60),color=color.green, text="Normal Spin")
+label(display=graph1.display, pos=(300,60),color=color.green, text="Normal Spin, C = 0.1")
 senthree 	= gcurve(display= graph1, color=color.red)
-label(display=graph1.display, pos=(300,70),color=color.red, text="50% More Spin")
+label(display=graph1.display, pos=(300,70),color=color.red, text="50% More Spin, C = 0.1")
 senfour 	= gcurve(display= graph1, color=color.magenta)
-label(display=graph1.display, pos=(300,80),color=color.magenta, text="C = 0.5")
+label(display=graph1.display, pos=(300,80),color=color.magenta, text="Normal Spin, C = 0.5")
 
 # Constant
 g 	= 9.81 # in m/s^2
-senario = [0, 0.25, 1.5 * 0.25, "Four"]
+senario = [0, 0.25, 1.5 * 0.25, "This is a thing, a really really really cool thing."]
 
 # Creates X axis
 x_axis 		= arrow()
