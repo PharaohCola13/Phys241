@@ -119,7 +119,7 @@ for i in angles:
 		Fdrag = -B * mag(cannon.v) ** 2 * norm(cannon.v)  # in N
 # Net force
 		Fnet = Fgrav  + Fdrag # in N
-		cannon.color = plot.color
+		cannon.color = curve.color
 # Updates momentum
 		cannon.p = cannon.p + Fnet * dt  # in kg m/s
 # Updates velocity
@@ -174,6 +174,7 @@ for i in [35, 45]:
 		if m == "with":
 			while True:
 				rate(100000)
+				cannon.color = curve2.color
 # Breaks loop when cannon hits floor
 				if cannon.pos.y < 0.0:
 					break
@@ -193,7 +194,6 @@ for i in [35, 45]:
 				Fdrag = -B * mag(cannon.v) ** 2 * norm(cannon.v)  # in N
 # Net force
 				Fnet = Fgrav  + Fdrag # in N
-				cannon.color = plot.color
 # Updates momentum
 				cannon.p = cannon.p + Fnet * dt  # in kg m/s
 # Updates velocity
@@ -212,6 +212,7 @@ for i in [35, 45]:
 		if m == "without":
 			while True:
 				rate(100000)
+				cannon.color = curve2.color
 # Breaks loop when cannon hits floor
 				if cannon.pos.y < 0.0:
 					break
@@ -221,7 +222,6 @@ for i in [35, 45]:
 				Fdrag = -B * mag(cannon.v) ** 2 * norm(cannon.v)  # in N
 # Net force
 				Fnet = Fgrav + Fdrag  # in N
-				cannon.color = plot.color
 # Updates momentum
 				cannon.p = cannon.p + Fnet * dt  # in kg m/s
 # Updates velocity
