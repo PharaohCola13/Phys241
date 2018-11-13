@@ -42,10 +42,10 @@ for i in wind:
 # Mass of ball
     baseball.m      = 0.150  # in kg
 # Part a) initial velocity had a magnitude of 50 m/s
-#    baseball.v = 50 * vector(cos(radians(45)), sin(radians(45)), cos(radians(90)))  # in m/s
+    baseball.v = 50 * vector(cos(radians(45)), sin(radians(45)), cos(radians(90)))  # in m/s
 
 # Part c) initial velocity had a magnitude of 49.1744 m/s or 110 mph
-    baseball.v = 49.1744 * vector(cos(radians(35)), sin(radians(35)), cos(radians(90)))  # in m/s
+#    baseball.v = 49.1744 * vector(cos(radians(35)), sin(radians(35)), cos(radians(90)))  # in m/s
     
 # Wind velocity in vector form
     windv = vector(i, 0, 0) # in m/s
@@ -56,14 +56,14 @@ for i in wind:
 # Coefficient of Drag B = 1/2 * c * rho * A
     B = 0.0039 + (0.0058)/(1 + exp((mag(baseball.v) - 35)/5)) # in kg/m
     
-# Force of air resistance 
+# Part b) force of air resistance
    # Fdrag = -B * mag(baseball.v)**2 * norm(baseball.v) # in N
     
-# Force of Drag with respect to the wind
-    Fdrag = -B * (mag(baseball.v) - mag(windv))**2 * (norm(baseball.v) - norm(windv)) # in N
+# Part c) force of Drag with respect to the wind
+   # Fdrag = -B * (mag(baseball.v) - mag(windv))**2 * (norm(baseball.v) - norm(windv)) # in N
     
 # Net Force
-    Fnet            = Fgrav + Fdrag # in N
+    Fnet            = Fgrav #+ Fdrag # in N
     # Momentum update of ball
     baseball.p      = baseball.p + Fnet * dt # in kg m/s
 # Velocity update of ball
