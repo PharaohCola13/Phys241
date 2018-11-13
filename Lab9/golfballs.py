@@ -85,12 +85,12 @@ for i in senario:
 		rate(10)
 		golfball.color = color.green
 # When the ball goes below zero it stops
-		if cannon.pos.y < 0.0:
+		if golfball.pos.y < 0.0:
 			break
 # Force of Drag
-		Fdrag 	= -C * rho * A * mag(cannon.v)** 2 * norm(cannon.v) # in N
+		Fdrag 	= -C * rho * A * mag(golfball.v)** 2 * norm(golfball.v) # in N
 # Magnus Force
-		Fmagnus = vector(-i * cannon.p.y, i * cannon.p.x, 0) # in N
+		Fmagnus = vector(-i * golfball.p.y, i * golfball.p.x, 0) # in N
 # Net Force
 		Fnet 	= Fgrav + Fdrag + Fmagnus # in N
 # Updates ball momentum
@@ -107,7 +107,7 @@ for i in senario:
 		rate(10)
 		golfball.color = color.red
 # When the ball goes below zero it stops
-		if cannon.pos.y < 0.0:
+		if golfball.pos.y < 0.0:
 			break
 # Force of Drag
 		Fdrag 	= -C * rho * A * mag(golfball.v)** 2 * norm(golfball.v) # in N
@@ -129,7 +129,7 @@ for i in senario:
 		rate(10)
 		golfball.color = color.magenta
 # When the ball goes below zero it stops
-		if cannon.pos.y < 0.0:
+		if golfball.pos.y < 0.0:
 			break
 # Coefficient of Drag
 		C 	= 0.5
