@@ -61,13 +61,13 @@ for i in angles:
 # Density with altitude dependance
 	rho    = rho_0 * (1 - ((a*cannon.pos.y)/T_0))**alpha
 # Drag coefficient
-	B = 4e-4 # in N/(m/s)^2
+	B = 4e-4 # in kg/m
 # Drag coefficient with density dependence
-	B = B * (rho/rho_0) # in N/(m/s)^2
+	#B = B * (rho/rho_0) # in kg/m
 # Force of drag
 	Fdrag = -B * mag(cannon.v)**2 * norm(cannon.v) # in N
 # Net force
-	Fnet = Fgrav + Fdrag # in N
+	Fnet = Fgrav #+ Fdrag # in N
 # Initial Time
 	t = 0 # in s
 # Time step
