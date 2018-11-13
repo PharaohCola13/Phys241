@@ -13,7 +13,7 @@ windtail    = gcurve(display= graph1, color=color.red)
 label(display=graph1.display, pos=(-75,2.5),color=color.red, text="-10 mph")
 
 # Constant
-g       = 9.81
+g       = 9.81 # in m/s^2
 wind    = [0, 4.4704, -4.4704] # in m/s
 
 # Creates a X axis
@@ -39,6 +39,7 @@ for i in wind:
     baseball        = sphere(make_trail=True)
     baseball.radius = 1
     baseball.pos    = vector(0, 1, 0)
+# Mass of ball
     baseball.m      = 0.150  # in kg
 # Part a) initial velocity had a magnitude of 50 m/s
 #    baseball.v = 50 * vector(cos(radians(45)), sin(radians(45)), cos(radians(90)))  # in m/s
@@ -47,33 +48,33 @@ for i in wind:
     baseball.v = 49.1744 * vector(cos(radians(35)), sin(radians(35)), cos(radians(90)))  # in m/s
     
 # Wind velocity in vector form
-    windv = vector(i, 0, 0)
+    windv = vector(i, 0, 0) # in m/s
     
 # The force of gravity acting on the ball
-    Fgrav = baseball.m * vector(0, -g, 0)
+    Fgrav = baseball.m * vector(0, -g, 0) # in N
     
 # Coefficient of Drag B = 1/2 * c * rho * A
-    B = 0.0039 + (0.0058)/(1 + exp((mag(baseball.v) - 35)/5))
+    B = 0.0039 + (0.0058)/(1 + exp((mag(baseball.v) - 35)/5)) # in kg/m
     
 # Force of air resistance 
-   # Fdrag = -B * mag(baseball.v)**2 * norm(baseball.v)
+   # Fdrag = -B * mag(baseball.v)**2 * norm(baseball.v) # in N
     
 # Force of Drag with respect to the wind
-    Fdrag = -B * (mag(baseball.v) - mag(windv))**2 * (norm(baseball.v) - norm(windv))
+    Fdrag = -B * (mag(baseball.v) - mag(windv))**2 * (norm(baseball.v) - norm(windv)) # in N
     
 # Net Force
-    Fnet            = Fgrav + Fdrag
+    Fnet            = Fgrav + Fdrag # in N
     # Momentum update of ball
-    baseball.p      = baseball.p + Fnet * dt
+    baseball.p      = baseball.p + Fnet * dt # in kg m/s
 # Velocity update of ball
-    baseball.v      = (baseball.p/baseball.m)
+    baseball.v      = (baseball.p/baseball.m) # in m/s
 # Position Update of ball
-    baseball.pos    = baseball.pos + baseball.v * dt
+    baseball.pos    = baseball.pos + baseball.v * dt # in m
 
 # Initial Time
-    t = 0
+    t = 0 # in s
 # Time step
-    dt = 0.1
+    dt = 0.1 # in s
     while i == wind[0]:
         rate(10)
 # When the ball goes below zero it stops
@@ -83,7 +84,7 @@ for i in wind:
 # Plots the trajectory
         windzero.plot(pos=(baseball.pos.x,baseball.pos.y))
 # Updates Time
-        t = t + dt
+        t = t + dt # in s
     while i == wind[1]:
         rate(10)
 # When the ball goes below zero it stops
@@ -93,7 +94,7 @@ for i in wind:
 # Plots the trajectory
         windhead.plot(pos=(baseball.pos.x, baseball.pos.y))
 # Updates Time
-        t = t + dt
+        t = t + dt # in s
     while i == wind[2]:
         rate(10)
 # When the ball goes below zero it stops
@@ -103,4 +104,4 @@ for i in wind:
 # Plots the trajectory
         windtail.plot(pos=(baseball.pos.x, baseball.pos.y))
 # Updates Time
-        t = t + dt
+        t = t + dt # un s
