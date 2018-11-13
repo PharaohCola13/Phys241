@@ -2,6 +2,7 @@
 from __future__ import division, print_function
 from visual import *
 from visual.graph import *
+from numpy import *
 
 # Creates the graphical display for the trajectory of each scenario
 graph1      = gdisplay(title="Wind Speed Trajectories", x=0, y=400, width=800, height=400, xtitle="Position in X [m]", ytitle="Position in Y [m]")
@@ -15,6 +16,9 @@ label(display=graph1.display, pos=(-75,2.5),color=color.red, text="-10 mph")
 # Constant
 g       = 9.81 # in m/s^2
 wind    = [0, 4.4704, -4.4704] # in m/s
+angles  = linspace(10, 60, 5)
+
+lots_of_angles = angles.tolist()
 
 # Creates a X axis
 x_axis          = arrow()
@@ -104,4 +108,46 @@ for i in wind:
 # Plots the trajectory
         windtail.plot(pos=(baseball.pos.x, baseball.pos.y))
 # Updates Time
-        t = t + dt # un s
+        t = t + dt # in s
+
+for i in lots_of_angles:
+    # Creates a ball of defined mass
+    baseball        = sphere(make_trail=True)
+    baseball.radius = 1
+    baseball.pos    = vector(0, 1, 0)
+# Mass of ball
+    baseball.m      = 0.150  # in kg
+# Part a) initial velocity had a magnitude of 50 m/s
+    baseball.v = 50 * vector(cos(radians(i)), sin(radians(i)), cos(radians(90)))  # in m/s
+
+# The force of gravity acting on the ball
+    Fgrav = baseball.m * vector(0, -g, 0) # in N
+    
+# Coefficient of Drag B = 1/2 * c * rho * A
+    B = 0.0039 + (0.0058)/(1 + exp((mag(baseball.v) - 35)/5)) # in kg/m
+    
+# Part b) force of air resistance
+    Fdrag = -B * mag(baseball.v)**2 * norm(baseball.v) # in N
+    
+# Net Force
+    Fnet            = Fgrav #+ Fdrag # in N
+    # Momentum update of ball
+    baseball.p      = baseball.p + Fnet * dt # in kg m/s
+# Velocity update of ball
+    baseball.v      = (baseball.p/baseball.m) # in m/s
+# Position Update of ball
+    baseball.pos    = baseball.pos + baseball.v * dt # in m
+
+# Initial Time
+    t = 0 # in s
+# Time step
+    dt = 0.1 # in s
+    while True:
+        rate(100)
+        print("--- {} radians ---".format(radians(i)))
+        # When the ball goes below zero it stops
+        if baseball.pos.y < 0.0:
+            break
+        baseball.color  = color.green
+# Plots the trajectory
+        windhead.plot(pos=(baseball.pos.x, baseball.pos.y))
