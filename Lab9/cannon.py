@@ -54,16 +54,16 @@ for i in angles:
 # Breaks loop when cannon hits floor
 		if cannon.pos.y < 0.0:
 			break
-		# Force of drag
+# Force of drag
 		Fdrag = vector(0,0,0)
-		# Net force
+# Net force
 		Fnet = Fgrav  + Fdrag # in N
 		cannon.color = plot.color
-		# Updates momentum
+# Updates momentum
 		cannon.p = cannon.p + Fnet * dt  # in kg m/s
-		# Updates velocity
+# Updates velocity
 		cannon.v = (cannon.p / cannon.m)  # in m/s
-		# Updates position
+# Updates position
 		cannon.pos = cannon.pos + cannon.v * dt  # in m
 
 		plot.plot(pos=(cannon.pos.x / 1000, cannon.pos.y / 1000))
@@ -115,16 +115,16 @@ for i in angles:
 # Breaks loop when cannon hits floor
 		if cannon.pos.y < 0.0:
 			break
-		# Force of drag
+# Force of drag
 		Fdrag = -B * mag(cannon.v) ** 2 * norm(cannon.v)  # in N
-		# Net force
+# Net force
 		Fnet = Fgrav  + Fdrag # in N
 		cannon.color = plot.color
-		# Updates momentum
+# Updates momentum
 		cannon.p = cannon.p + Fnet * dt  # in kg m/s
-		# Updates velocity
+# Updates velocity
 		cannon.v = (cannon.p / cannon.m)  # in m/s
-		# Updates position
+# Updates position
 		cannon.pos = cannon.pos + cannon.v * dt  # in m
 
 		curve.plot(pos=(cannon.pos.x / 1000, cannon.pos.y / 1000))
@@ -156,49 +156,49 @@ for i in [35, 45]:
 	for m in ["with", "without"]:
 		curve2 = gcurve(display=plot2)
 		llabel = label(display=plot2.display, text="{}^o, {} density correction".format(i, m), height=10)
-	# Creates a ball
+# Creates a ball
 		cannon 		= sphere(make_trail=True)
 		cannon.radius 	= 1000
 		cannon.pos 	= vector(0, 0, 0) # in m
 		cannon.m 	= 10  # in kg
-	# Velocity of the ball
+# Velocity of the ball
 		cannon.v 	= 700 * vector(cos(radians(i)), sin(radians(i)), cos(radians(90)))  # in m/s
-	# Momentum of ball
+# Momentum of ball
 		cannon.p 	= cannon.v * cannon.m # in kg m/s
-	# Force of gravity on ball
+# Force of gravity on ball
 		Fgrav 		= cannon.m * vector(0, -g, 0) # in N
-	# Initial Time
+# Initial Time
 		t = 0 # in s
-	# Time step
+# Time step
 		dt = 0.01 # in s
 		if m == "with":
 			while True:
 				rate(100000)
-		# Breaks loop when cannon hits floor
+# Breaks loop when cannon hits floor
 				if cannon.pos.y < 0.0:
 					break
 				rho_0 = 1.225  # in kg/m^3
-				# Predefined variable
+# Predefined variable
 				y_0 = 1e4  # in m
-				# Absolute Temperature at sea level
+# Absolute Temperature at sea level
 				T_0 = 288.2  # in K
-				# Predefined variable
+# Predefined variable
 				alpha = 2.5
-				# Predefined variable
+# Predefined variable
 				a = 6.5e-3  # in K/m
-				# Density with altitude dependence
+# Density with altitude dependence
 				rho = rho_0 * (1 - ((a * cannon.pos.y) / T_0)) ** alpha
 				B = B * (rho/rho_0)
-				# Force of drag
+# Force of drag
 				Fdrag = -B * mag(cannon.v) ** 2 * norm(cannon.v)  # in N
-				# Net force
+# Net force
 				Fnet = Fgrav  + Fdrag # in N
 				cannon.color = plot.color
-				# Updates momentum
+# Updates momentum
 				cannon.p = cannon.p + Fnet * dt  # in kg m/s
-				# Updates velocity
+# Updates velocity
 				cannon.v = (cannon.p / cannon.m)  # in m/s
-				# Updates position
+# Updates position
 				cannon.pos = cannon.pos + cannon.v * dt  # in m
 
 				curve2.plot(pos=(cannon.pos.x / 1000, cannon.pos.y / 1000))
@@ -212,21 +212,21 @@ for i in [35, 45]:
 		if m == "without":
 			while True:
 				rate(100000)
-				# Breaks loop when cannon hits floor
+# Breaks loop when cannon hits floor
 				if cannon.pos.y < 0.0:
 					break
-				# Drag coefficient
+# Drag coefficient
 				B = 4e-4  # in kg/m
-				# Force of drag
+# Force of drag
 				Fdrag = -B * mag(cannon.v) ** 2 * norm(cannon.v)  # in N
-				# Net force
+# Net force
 				Fnet = Fgrav + Fdrag  # in N
 				cannon.color = plot.color
-				# Updates momentum
+# Updates momentum
 				cannon.p = cannon.p + Fnet * dt  # in kg m/s
-				# Updates velocity
+# Updates velocity
 				cannon.v = (cannon.p / cannon.m)  # in m/s
-				# Updates position
+# Updates position
 				cannon.pos = cannon.pos + cannon.v * dt  # in m
 				curve2.plot(pos=(cannon.pos.x / 1000, cannon.pos.y / 1000))
 				llabel.color = curve2.color
