@@ -81,13 +81,13 @@ for i in wind:
 # When the ball goes below zero it stops
 		if baseball.pos.y <= 0:
 			break
-		# Net Force
+# Net Force
 		Fnet = Fgrav  #+ Fdrag # in N
-		# Momentum update of ball
+# Momentum update of ball
 		baseball.p = baseball.p + Fnet * dt  # in kg m/s
-		# Velocity update of ball
+# Velocity update of ball
 		baseball.v = (baseball.p / baseball.m)  # in m/s
-		# Position Update of ball
+# Position Update of ball
 		baseball.pos = baseball.pos + baseball.v * dt  # in m
 
 		baseball.color  = color.cyan
@@ -100,13 +100,13 @@ for i in wind:
 # When the ball goes below zero it stops
 		if baseball.pos.y <= 0.0:
 			break
-		# Net Force
+# Net Force
 		Fnet = Fgrav  + Fdrag # in N
-		# Momentum update of ball
+# Momentum update of ball
 		baseball.p = baseball.p + Fnet * dt  # in kg m/s
-		# Velocity update of ball
+# Velocity update of ball
 		baseball.v = (baseball.p / baseball.m)  # in m/s
-		# Position Update of ball
+# Position Update of ball
 		baseball.pos = baseball.pos + baseball.v * dt  # in m
 
 		baseball.color  = color.green
@@ -119,13 +119,13 @@ for i in wind:
 # When the ball goes below zero it stops
 		if baseball.pos.y <= 0:
 			break
-		# Net Force
+# Net Force
 		Fnet = Fgrav  + Fdrag # in N
-		# Momentum update of ball
+# Momentum update of ball
 		baseball.p = baseball.p + Fnet * dt  # in kg m/s
-		# Velocity update of ball
+# Velocity update of ball
 		baseball.v = (baseball.p / baseball.m)  # in m/s
-		# Position Update of ball
+# Position Update of ball
 		baseball.pos = baseball.pos + baseball.v * dt  # in m
 
 		baseball.color  = color.red
@@ -147,7 +147,7 @@ for a in lots_of_angles:
 	baseball.m      = 0.150  # in kg
 # Part a) initial velocity had a magnitude of 50 m/s
 	baseball.v = 50 * vector(cos(radians(a)), sin(radians(a)), cos(radians(90)))  # in m/s
-	# Momentum update of ball
+# Momentum update of ball
 	baseball.p      = baseball.m * baseball.v # in kg m/s
 
 # The force of gravity acting on the ball
@@ -167,20 +167,20 @@ for a in lots_of_angles:
 	dt = 0.01 # in s
 	while True:
 		rate(100)
-		# When the ball goes below zero it stops
+# When the ball goes below zero it stops
 		if baseball.pos.y <= 0.000:
 			position = []
 			position.append(baseball.pos.x)
 			print("--- Angle: {} degrees, Maximum Range: {} m ---".format(a, position[-1]))
 			position[:] = []
 			break
-		# Net Force
+# Net Force
 		Fnet = Fgrav  + Fdrag # in N
-		# Momentum update of ball
+# Momentum update of ball
 		baseball.p = baseball.p + Fnet * dt  # in kg m/s
-		# Velocity update of ball
+# Velocity update of ball
 		baseball.v = (baseball.p / baseball.m)  # in m/s
-		# Position Update of ball
+# Position Update of ball
 		baseball.pos = baseball.pos + baseball.v * dt  # in m
 
 		baseball.color  = color.green
