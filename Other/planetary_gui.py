@@ -1,7 +1,7 @@
-#from __future__ import division, print_function
-#import visual as vis
-#import visual.materials as vismat
-#import visual.graph as vig
+from __future__ import division, print_function
+import visual as vis
+import visual.materials as vismat
+import visual.graph as vig
 from numpy import *
 
 try:
@@ -15,14 +15,20 @@ dim = "#303030"  #   Background
 dimf = "#00C0FF"  #   Font Color
 disa = "#d400ff" #   Disabled Text
 
+scene = vis.display()
+star = vis.sphere(make_trail=True)
+planet = vis.sphere(make_trail=True)
+main_plot = vig.gdisplay(x=510, y=510, width=1100, height=550, xtitle="Time in Earth Years",
+						 ytitle="Position in Y [m]")
+planetlabel = vis.label()
+starlabel = vis.label()
+
 class Planetary(tk.Frame):
-	#star = vis.sphere(make_trail=True)
-	#planet = vis.sphere(make_trail=True)
-#	scene = vis.display()
 	def __init__(self, master):
 		tk.Frame.__init__(self, master)
-		self.createWidgets(master)
 		master.bind("<Return>", self.planetary_system)
+		self.createWidgets(master)
+
 
 	def createWidgets(self, master):
 		self.star_color = tk.StringVar()
@@ -31,27 +37,14 @@ class Planetary(tk.Frame):
 		self.planet_name = tk.StringVar()
 
 		self.colordict = {"Red" 		: "(255,000,000)",
-					 	  "Cyan" 		: "(000,255,255)",
-					 	  "White"		: "(255,255,255)",
-					 	  "Orange"		: "(255,165,000)",
+						  "Cyan" 		: "(000,255,255)",
+						  "White"		: "(255,255,255)",
+						  "Orange"		: "(255,165,000)",
 						  "Yellow"		: "(255,255,000)",
 						  "Yellow-White": "(255,255,224)",
 						  "Purple"		: "(255,000,255)",
 					}
-						
-#		self.color1 = tk.Radiobutton(master, text="Red", variable=self.star_color, value=self.colordict["Red"])
-#		self.color1.grid(row=0, column=0, sticky='nsw')
 
-#		self.color2 = tk.Radiobutton(master, text="Cyan", variable=self.star_color, value=colordict["Cyan"])
-#		self.color2.grid(row=1, column=0, sticky='nsw')
-
-#		self.color3 = tk.Radiobutton(master, text="White", variable=self.star_color, value=colordict["White"])
-#		self.color3.grid(row=2, column=0, sticky='nsw')
-
-#		self.color4 = tk.Radiobutton(master, text="Orange", variable=self.star_color, value=colordict["Orange"])
-#		self.color4.grid(row=3, column=0, sticky='nsw')
-
-#		self.star_color.set(colordict["Red"])
 
 		self.plot_on = tk.Radiobutton(master, text="Plot", variable=self.plot, value="on")
 		self.plot_on.grid(row=0, column=0, sticky='nsw')
@@ -63,7 +56,7 @@ class Planetary(tk.Frame):
 
 
 		self.time = tk.Label(master, text="0.0e-00 Earth Years")
-		self.time.grid(row=0, column=6, sticky='nse')
+		self.time.grid(row=13, column=0, columnspan=2, sticky='nsew')
 		n = 4
 		# Mass of Star
 
@@ -165,8 +158,8 @@ class Planetary(tk.Frame):
 
 	def RGB(self, red,green,blue): 
 		return '#%02x%02x%02x' % (red,green,blue)
-
 	def planetary_system(self, master):
+		global star, planet, main_plot, planetlabel, starlabel
 		solarmass = 1.989e30 # in kg
 		#self.unbound()
 		self.label 	=str(self.masscoeff.get()) + "X10^(" + str(self.massexp.get()) + ")"
@@ -176,7 +169,7 @@ class Planetary(tk.Frame):
 		self.mass1.config(text=self.label1)
 
 		starm = self.masscoeff.get()* 10**self.massexp.get()
-
+		starcolor = self.colordict["Purple"]
 		if starm <= 50 * solarmass: # Class O
 			starcolor = self.colordict["Cyan"]
 			tk_color = self.RGB(int(starcolor[1:4]),int(starcolor[5:8]), int(starcolor[9:12]))
@@ -216,60 +209,56 @@ class Planetary(tk.Frame):
 		YinS = 365. * 24. * 60. * 60  # s
 		D = 1.5e11  # m
 
-		#print(self.masscoeff.get()* 10**self.massexp.get())
+		star.color  = vis.vector(float(starcolor[1:4])/255, float(starcolor[5:8])/255, float(starcolor[9:12])/255) #vis.vector(1, 0, 0)
+		star.pos = vis.vector(0, 0, 0)
+		star.radius = 0.1
 
+		star.m = self.masscoeff.get()* 10**self.massexp.get()
+		print(star.m)
+		star.v = vis.vector(0, 0, 0)
+		star.p = star.m * star.v
 
-#		star.color  = vis.vector(float(starcolor[1:4])/255, float(starcolor[5:8])/255, float(starcolor[9:12])/255) #vis.vector(1, 0, 0)
-#		star.pos = vis.vector(0, 0, 0)
-#		star.radius = 0.1
+		planet.pos = vis.vector(0, 0, 1)
+		planet.radius = 0.1
+		planet.m = self.masscoeff1.get()* 10**self.massexp1.get()
 
-#		star.m = self.masscoeff.get()* 10**self.massexp.get()
-#		star.v = vis.vector(0, 0, 0)
-#		star.p = star.m * star.v
-#
-#		planet.pos = vis.vector(0, 0, 1)
-#		planet.radius = 0.1
-#		planet.m = 0.5 * star.m
+		planet.v = vis.vector(0, sqrt(G * star.m/(vis.mag(planet.pos) * D)), 0)
+		planet.p = planet.m * planet.v
 
-#		planet.v = vis.vector(0, sqrt(G * star.m/(vis.mag(planet.pos) * D)), 0)
-#		planet.p = planet.m * planet.v
-
-		if self.plot.get() == "on":
-			print("Plot On")
-		#	main_plot = vig.gdisplay(x=510, y=510, width=1100, height=550, xtitle="Time in Earth Years", ytitle="Position in Y [m]")
-		#	main = vig.gcurve(gdisplay=main_plot, color=star.color)  # Define functions to plot
+	#	if self.plot.get() == "on":
+		main = vig.gcurve(gdisplay=main_plot, color=star.color)  # Define functions to plot
 
 		t = 0
-		dt = YinS/1000000
-		#starlabel = vis.label(pos=vector(0, 0.5, 0), color=starcolor, text=self.starname.get())
-		#planetlabel = vis.label(pos=planet.pos + vector(0, 0.5, 0), color=planetcolor, text=self.planetname.get())
-		while t <= 100 * dt:
-	#		vis.rate(1e50)
-	#		r = (planet.pos - star.pos) * D
-#			rmag = vis.mag(r)
-	#		rhat = vis.norm(r)
-	#		Fmag = (G * (star.m * planet.m)/rmag**2)
-#
-#			Fnet = -Fmag * rhat
-#
-#			planet.p = planet.p + Fnet *dt
-#			planet.pos = planet.pos + (planet.p/planet.m/D) * dt
+		dt = YinS/10000
+		starlabel.pos=pos=vis.vector(0, 0.25, 0)
+		starlabel.text=self.starname.get()
+		while True:
+			#print(planet.m)
+			vis.rate(100000000000)
+			r = (planet.pos - star.pos) * D
+			rmag = vis.mag(r)
+			rhat = vis.norm(r)
+			Fmag = (G * (star.m * planet.m)/rmag**2)
+
+			Fnet = -Fmag * rhat
+
+			planet.p = planet.p + Fnet *dt
+			planet.pos = planet.pos + (planet.p/planet.m/D) * dt
 
 			if self.plot.get() == "on":
-				print("Ploting")
-#				main.plot(pos=(t/YinS, planet.pos.y))
-			#if rmag >= 100 * D:
-			#	break
-			#	self.unbound()
+				main.plot(pos=(t/YinS, planet.pos.y))
+			if rmag >= 100 * D:
+				break
+				self.unbound()
 
-#			master.update()
-#			master.update_idletasks()
+			master.update()
+			master.update_idletasks()
+
+			planetlabel.pos=planet.pos+ vis.vector(0, 0.25, 0)
+			planetlabel.text=text=self.planet_name.get()
+
 			self.time.config(text=str(t/YinS)+" Earth Years")
 			t = t + dt
-
-
-		#print(color)
-		#print(star_obj.color)
 
 if __name__ == '__main__':
 	root = tk.Tk()
@@ -277,8 +266,8 @@ if __name__ == '__main__':
 	root.title("Planetary Motion")
 
 	#root.geometry("425x425")
-	root.maxsize(450, 450)
-	root.minsize(450, 450)
+	root.maxsize(455, 455)
+	root.minsize(455, 455)
 
 	#root.maxsize(425, 425)
 	#root.minsize(425, 425)
