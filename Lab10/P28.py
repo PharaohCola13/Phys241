@@ -1,8 +1,8 @@
+# Spencer Riley
+# Code copied from the book verbatim cause the question told me too
 from __future__ import division, print_function
 from visual import *
 from visual.graph import *
-#from visual.materials import  *
-
 from random import random
 
 gg = gcurve(color=color.yellow)
