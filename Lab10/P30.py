@@ -1,6 +1,10 @@
+# Spencer Riley
+# Code copied from the book verbatim cause the question told me too
+
 from visual import *
 from visual.graph import *
 from random import random
+
 # Start with 100 atoms in an excited state
 # (try larger or smaller numbers)
 
