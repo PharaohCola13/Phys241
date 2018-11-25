@@ -16,9 +16,3 @@ while n < 20:
 
 	gg.plot(pos=(n, a))
 	n = n + 1
-
-# Part A) They are not the same plots
-# Part A) n -> energy state; a ->
-# Part B) Max value of random() is 1.0
-# Part C) Min value of random(0 is 0.0
-
