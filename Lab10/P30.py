@@ -51,9 +51,3 @@ while t < tmax:
 	Natoms = Natoms - (g + r)
 	t = t + dt
 print(greens,'green emissions,',reds,'red emissions')
-
-# Part A) Emission of photons vs time in ns
-# Part B) Red Photons
-# Part C) The emission of green photons do not vary significantly
-# Part D) Experimental Average = 29.933; fraction of trails within the range = 25/30
-# Range = 30 +- 5
