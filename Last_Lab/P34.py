@@ -2,12 +2,12 @@
 from __future__ import division, print_function
 from visual import *
 from visual.graph import *
-import aux
+#import aux
 
 # For the most part, this code was collected from the book
 
 # Creates plotting environments
-gdx = gdisplay(x=0,y=600, width=1000, height=500,
+gdx = gdisplay(x=0,y=600, width=1000, height=500, xtitle="time [s]", ytitle="Momentum [kg m/s]",
 title='X Component of Momentum')
 Au_px = gcurve(color=color.yellow)
 Alpha_px = gcurve(color=color.magenta)
@@ -18,7 +18,7 @@ label(display=gdx.display, pos=(1.5e-21, -4e-20), text="Alpha.p.x", color=color.
 label(display=gdx.display, pos=(2.49e-21, -7e-20), text="Au.p.x + Alpha.p.x", color=color.cyan)
 
 
-gdy = gdisplay(x=500,y=600,width=1000, height=500,
+gdy = gdisplay(x=500,y=600,width=1000, height=500, xtitle="time [s]", ytitle="Momentum [kg m/s]",
                title='Y Component of Momentum')
 Au_py           = gcurve(color=color.yellow)
 Alpha_py        = gcurve(color=color.red)
@@ -100,8 +100,8 @@ while t <= 1.3e-20:
 # If contact is made between the alpha particle and gold nucleus, the transcript of Star Trek's First Contact
 # will be printed and the loop will break
 	if rmag - Alpha.radius <= Au.radius:
-		aux.printer(aux.contact)
-		aux.trek1.close()
+		#aux.printer(aux.contact)
+	#	aux.trek1.close()
 		break
 # Updates time
 	t = t + dt
@@ -116,8 +116,8 @@ for theta in angles:
 	print("The impact parameter for {} rads in {:1.2E} meters".format(round(radians(theta), 2), impact))
 
 # At the end of the script, the transcript of Star Trek's Final Frontier will be printed.
-print("This is the end of the program, Happy Holiday's. \n {}".format(aux.printer(aux.frontier)))
-aux.trek2.close()
+#print("This is the end of the program, Happy Holiday's. \n {}".format(aux.printer(aux.frontier)))
+#aux.trek2.close()
 
 # 35
 # Is momentum conserved? Yes, this can be seen by the plots that the sum of both the x and y component of momentum do not change of the time interval.
