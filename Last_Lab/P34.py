@@ -1,15 +1,20 @@
 from __future__ import division, print_function
 from visual import *
 from visual.graph import *
+#import aux
 
 
-gdx = gdisplay(x=0,y=600, width=500,
-title='p_x')
-p_Au_x_graph = gcurve(color=color.yellow)
-p_Alpha_x_graph = gcurve(color=color.magenta)
+gdx = gdisplay(x=0,y=600, width=1000, height=500,
+title='X Component of Momentum')
+Au_px = gcurve(color=color.yellow)
+Alpha_px = gcurve(color=color.magenta)
+sum_p_x         = gcurve(color=color.cyan)
 ## other gcurves if needed
-gdy = gdisplay(x=500,y=600,width=500,title='p_y')
-p_Au_y_graph = gcurve(color=color.yellow)
+gdy = gdisplay(x=500,y=600,width=1000, height=500, title='Y Component of Momentum')
+Au_py           = gcurve(color=color.yellow)
+Alpha_py        = gcurve(color=color.red)
+sum_p_y         = gcurve(color=color.green)
+
 ## other gcurves if needed
 
 scene.width = 1024
@@ -43,36 +48,57 @@ Alpha.p = vector(1.043e-19,0,0)
 dt      = 1e-23
 t       = 0
 
-while t < 1.3e-20:
-    rate(100)
+# Impact Parameter
+b = Alpha.pos.y - Au.pos.y
+print("The impact parameter is {} meters.".format(b))
 
-    r       = Alpha.pos - Au.pos
-    rmag    = mag(r)
-    rhat    = norm(r)
+while t <= 1.3e-20:
+	rate(100)
 
-    Felec = oofpez * (qAu * qAlpha)/rmag**2
-    Fnet  = Felec * rhat
+	r       = Alpha.pos - Au.pos
+	rmag    = mag(r)
+	rhat    = norm(r)
 
-    Alpha.p   = Alpha.p + Fnet * dt
-    Alpha.pos = Alpha.pos+(Alpha.p/m_Alpha) * dt
+	Felec = oofpez * (qAu * qAlpha)/rmag**2
+	Fnet  = Felec * rhat
 
-    Au.p      = Au.p - Fnet * dt
-    Au.pos    = Au.pos + (Au.p/m_Au) * dt
+	Alpha.p   = Alpha.p + Fnet * dt
+	Alpha.pos = Alpha.pos+(Alpha.p/m_Alpha) * dt
 
-    b = (oofpez*(qAu * qAlpha))/(0.5 * m_Alpha * mag(Alpha.p/m_Alpha)**2)
-    print(b)
-    p_Au_x_graph.plot(pos=(t, Au.p.x))
-    p_Alpha_x_graph.plot(pos=(t, Alpha.p.x))
+	Au.p      = Au.p - Fnet * dt
+	Au.pos    = Au.pos + (Au.p/m_Au) * dt
 
-    p_Au_y_graph.plot(pos=(t, Au.p.y))
-    #print(Au.pos)
-    if rmag - Alpha.radius <= Au.radius:
-        print("Collision")
-        break
+	Au_px.plot(pos=(t, Au.p.x))
+	Alpha_px.plot(pos=(t, Alpha.p.x))
+	sum_p_x.plot(pos=(t, Au.p.x + Alpha.p.x))
+	label(display=gdx.display, pos=(1.17e-21, -1e-20), text="Au.p.x", color=color.yellow)
+	label(display=gdx.display, pos=(1.5e-21, -4e-20), text="Alpha.p.x", color=color.magenta)
+	label(display=gdx.display, pos=(2.49e-21, -7e-20), text="Au.p.x + Alpha.p.x", color=color.cyan)
 
-    t = t + dt
+	Au_py.plot(pos=(t, Au.p.y))
+	Alpha_py.plot(pos=(t, Alpha.p.y))
+	sum_p_y.plot(pos=(t, Au.p.y + Alpha.p.y))
+	label(display=gdy.display, pos=(1.17e-21, -1e-20), text="Au.p.y", color=color.yellow)
+	label(display=gdy.display, pos=(1.5e-21, -2e-20), text="Alpha.p.y", color=color.red)
+	label(display=gdy.display, pos=(2.49e-21, -3e-20), text="Au.p.y + Alpha.p.y", color=color.green)
 
-# Part a) The code will shoot a alpha particle at a gold nucleus.
-# Part b)
-# Part c) Yes, the gold atom moves. Yes it should move, this is because there is a mutal force being applied on both particles.
-# Part d)
+	if rmag - Alpha.radius <= Au.radius:
+		aux.printer(aux.contact)
+		aux.trek1.close()
+		break
+
+	t = t + dt
+print()
+theta = acos(dot(Alpha.p, Au.p) / (mag(Alpha.p) * mag(Au.p)))
+print("The angle of scattering is {} rads or {} degrees".format(round(theta, 2), round(degrees(theta), 2)))
+angles = [90, 169, 38, 13]
+for theta in angles:
+	impact = (oofpez * qAlpha * qAu)/(m_Alpha * mag(Alpha.p/m_Alpha)**2) * (sqrt((1 + cos(radians(theta)))/(1 - cos(radians(theta)))))
+	print("The impact parameter for {} rads in {:1.2E} meters".format(round(radians(theta), 2), impact))
+print("This is the end of the program. \n {}".format(aux.printer(aux.frontier)))
+aux.trek2.close()
+
+# 35
+# Is momentum conserved? Yes, this can be seen by the plots that the sum of both the x and y component of momentum do not change of the time interval.
+# What should be changed if not?
+#If the momentum doesn't appear to be conserved than there may be a miscalculation associated with the Electric force that is propagated to the momentum calculation.
