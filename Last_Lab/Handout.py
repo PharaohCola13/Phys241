@@ -23,6 +23,7 @@ x_axis.pos      = vector(0,0,0)
 x_axis.axis     = 75 * vector(1, 0, 0)
 x_axis.color    = color.red
 x_axis.shaftwidth = 1
+label(pos=(37.5, 0), text="x-axis")
 
 # Y-axis
 y_axis          = arrow()
@@ -30,6 +31,7 @@ y_axis.pos      = vector(0,0,0)
 y_axis.axis     = 75 * vector(0, 1, 0)
 y_axis.color    = color.cyan
 y_axis.shaftwidth = 1
+label(pos=(0, 37.5), text="y-axis")
 
 # Z-axis
 z_axis          = arrow()
@@ -37,6 +39,7 @@ z_axis.pos      = vector(0,0,0)
 z_axis.axis     = 75 * vector(0, 0, 1)
 z_axis.color    = color.yellow
 z_axis.shaftwidth = 1
+label(pos=(0, 0, 37.5), text="z-axis")
 
 # Creates the ball
 ball        = sphere(make_trail=True)
