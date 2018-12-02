@@ -13,10 +13,20 @@ Au_px = gcurve(color=color.yellow)
 Alpha_px = gcurve(color=color.magenta)
 sum_p_x         = gcurve(color=color.cyan)
 
-gdy = gdisplay(x=500,y=600,width=1000, height=500, title='Y Component of Momentum')
+label(display=gdx.display, pos=(1.17e-21, -1e-20), text="Au.p.x", color=color.yellow)
+label(display=gdx.display, pos=(1.5e-21, -4e-20), text="Alpha.p.x", color=color.magenta)
+label(display=gdx.display, pos=(2.49e-21, -7e-20), text="Au.p.x + Alpha.p.x", color=color.cyan)
+
+
+gdy = gdisplay(x=500,y=600,width=1000, height=500,
+               title='Y Component of Momentum')
 Au_py           = gcurve(color=color.yellow)
 Alpha_py        = gcurve(color=color.red)
 sum_p_y         = gcurve(color=color.green)
+
+label(display=gdy.display, pos=(1.17e-21, -1e-20), text="Au.p.y", color=color.yellow)
+label(display=gdy.display, pos=(1.5e-21, -2e-20), text="Alpha.p.y", color=color.red)
+label(display=gdy.display, pos=(2.49e-21, -3e-20), text="Au.p.y + Alpha.p.y", color=color.green)
 
 # Scene dimensions
 scene.width = 1024
@@ -60,7 +70,7 @@ b = Alpha.pos.y - Au.pos.y
 print("The impact parameter is {} meters.".format(b))
 
 while t <= 1.3e-20:
-	rate(100)
+	rate(1000)
 # Calculates displacement
 	r       = Alpha.pos - Au.pos
 	rmag    = mag(r)
@@ -81,17 +91,11 @@ while t <= 1.3e-20:
 	Au_px.plot(pos=(t, Au.p.x))
 	Alpha_px.plot(pos=(t, Alpha.p.x))
 	sum_p_x.plot(pos=(t, Au.p.x + Alpha.p.x))
-	label(display=gdx.display, pos=(1.17e-21, -1e-20), text="Au.p.x", color=color.yellow)
-	label(display=gdx.display, pos=(1.5e-21, -4e-20), text="Alpha.p.x", color=color.magenta)
-	label(display=gdx.display, pos=(2.49e-21, -7e-20), text="Au.p.x + Alpha.p.x", color=color.cyan)
 
 # Plots the y components of momentum
 	Au_py.plot(pos=(t, Au.p.y))
 	Alpha_py.plot(pos=(t, Alpha.p.y))
 	sum_p_y.plot(pos=(t, Au.p.y + Alpha.p.y))
-	label(display=gdy.display, pos=(1.17e-21, -1e-20), text="Au.p.y", color=color.yellow)
-	label(display=gdy.display, pos=(1.5e-21, -2e-20), text="Alpha.p.y", color=color.red)
-	label(display=gdy.display, pos=(2.49e-21, -3e-20), text="Au.p.y + Alpha.p.y", color=color.green)
 
 # If contact is made between the alpha particle and gold nucleus, the transcript of Star Trek's First Contact
 # will be printed and the loop will break
@@ -119,3 +123,4 @@ aux.trek2.close()
 # Is momentum conserved? Yes, this can be seen by the plots that the sum of both the x and y component of momentum do not change of the time interval.
 # What should be changed if not?
 #If the momentum doesn't appear to be conserved than there may be a miscalculation associated with the Electric force that is propagated to the momentum calculation.
+
