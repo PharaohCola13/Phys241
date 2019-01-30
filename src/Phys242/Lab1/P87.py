@@ -1,3 +1,4 @@
+# Spencer Riley
 from __future__ import division, print_function
 from visual import *
 from visual.graph import *
@@ -28,27 +29,20 @@ t = 0
 theta = 0
 dtheta = 0
 
-Fnet = (0.1, 0, 0)
+Fnet = vector(0.1,0,0)
 aor = axle.axis
 while t < 7:
 	rate(10000)
 # Apply Angular Momentum Principle
 	torque = cross(axle.axis, Fnet)
-	print(torque)
 	L = L + torque * deltat
 # Update angle and rod position
 	omega = L/I
 	omega_scalar = dot(omega, norm(aor))
 	dtheta = omega_scalar * deltat
 	rod.rotate(angle=dtheta, axis=axle.axis, origin=axle.pos)
-
 	t = t + deltat
 	theta = theta + dtheta
-
-print(theta)
-print(mag(omega))
-
-print(mag(omega)/theta)
 
 
 
