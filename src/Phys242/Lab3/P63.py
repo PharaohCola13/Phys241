@@ -1,15 +1,11 @@
+þ# Spencer Riley
+
 import numpy as np
 import matplotlib
 from matplotlib import pyplot as plt
 from visual.factorial import *
-from visual.graph import *
 
-tempq1 = gcurve()
-tempq2  = gcurve()
-
-lnways1 = gcurve()
-lnways2 = gcurve()
-lnwaysall = gcurve()
+plt.figure()
 
 N1      = 300
 N2      = 200
@@ -38,12 +34,20 @@ while q1 <= qtotal: # for each possible value of energy in 1
 	dS2 = kb * np.abs(np.log(combin(a2+1, b2+1)) - np.log(ways2))
 	T2 	= dE/dS2
 # Plot number of ways to arrange energy in both:
-	tempq1.plot(pos=(q1, T1), color=color.blue)
-	tempq2.plot(pos=(q1, T2), color=color.green)
+	Q1T1 = plt.scatter(q1, T1, color='blue', label=r"$q_1$ vs $T_1$")
+	Q1T2 = plt.scatter(q1, T2, color='green', label=r"$q_1$ vs $T_2$")
 
 	if np.abs(T2 - T1) <= 1:
 		print(q1, q2, T2-T1)
 	q1 = q1 + 1
+# Plotting Labels, title, etc
+plt.legend(handles=[Q1T1, Q1T2])
+plt.title("Correlation between the number of quanta\n and the Temperature")
+plt.xlabel(r"$q_1$ [quanta]")
+plt.ylabel("Temperature [K]")
+
+# Showin the plot
+plt.show()
 
 # The values of q1 and q2 at the point of intersection on the
 # temperature plot are 60 and 40 quanta respectively. This is
