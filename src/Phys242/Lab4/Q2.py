@@ -6,6 +6,7 @@ xi = -2
 xf = 2
 dx = array([1, 0.5, 0.1, 0.01])
 
+print("\33[92m" + "---"*3 + " Simpson Quadrature " + "---"*3 + "\33[0m")
 print(unicodedata.lookup("GREEK CAPITAL LETTER DELTA")+ "x" + "\t\t" + "Results" + "\t\t" + "Error")
 for i in dx:
     x = arange(xi, xf + i, i)
