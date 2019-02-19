@@ -1,11 +1,12 @@
 # Spencer Riley
 from numpy import *
+import unicodedata
 
 xi = -2
 xf = 2
 dx = array([1, 0.5, 0.1, 0.01])
 
-print("Delta x" + "\t\t" + "Results" + "\t\t" + "Error")
+print(unicodedata.lookup("GREEK CAPITAL LETTER DELTA")+ "x" + "\t\t" + "Results" + "\t\t" + "Error")
 for i in dx:
     #print("i = {}".format(i))
     x = arange(xi, xf + i, i)
