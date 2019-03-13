@@ -11,13 +11,13 @@ theta   = 0
 dtheta  = (2*pi)/N
 R       = 0.1
 
-electron        = sphere()#make_trail=True)
+electron        = sphere(make_trail=True)
 #electron.pos    = vector(0.15, 0, 0)
-electron.pos    = vector(0.25, -0.05,0)
+electron.pos    = vector(0.3, -0.05,0)
 electron.q      = -1.6e-19
 electron.m      = 9.11e-31
 #electron.p      = vector(0,0,0)
-electron.p      = electron.m * vector(0, 1e-3, 1e-2)
+electron.p      = electron.m * vector(1e-3, 1e-3, 1e-2)
 electron.radius = (pi * R)/N
 
 while theta < 2 * pi:
@@ -32,7 +32,7 @@ while theta < 2 * pi:
 
 t       = 0
 dt      = 6e-3
-while True:
+while t < 1e3:
     E_net = vector(0, 0, 0)
     for i in range(N):
         rate(10000000000000)
