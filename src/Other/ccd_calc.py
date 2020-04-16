@@ -7,10 +7,17 @@ from numpy import *
 # Latitude
 phi = 34.059
 # Day of the year
+<<<<<<< HEAD
 Nday = 34
 # Time of expected observation
 h = 19 # Clock Hour
 m = 0.0 # Clock Minute
+=======
+Nday = 329.0
+# Time of expected observation
+h = 19.0 # Clock Hour
+m = 21.0 # Clock Minute
+>>>>>>> 818ec196400f1d8963f597e60db6dbcca9eb35ef
 T = ((h*60.0) + m)/60.0 # Time in units of hours
 # Right Ascention from handout
 RA_hm = [
