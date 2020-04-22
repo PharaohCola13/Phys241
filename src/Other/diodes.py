@@ -106,4 +106,42 @@ def Part2():
     N914()
     pv_mod()
     plt.show()
-Part2()
+def Laser2():
+    def red_blue():
+        red = [6.84e3, 12.73e3, 13.46e3, 14.52e3, 15.43e3]
+        blue = [44.5e3, 56.4e3, 46.3e3, 54.1e3]
+
+        G_0 = 1/(7.17e3)
+        G_r = 1/array(red)
+        G_b = 1/array(blue)
+
+        red_fit = poly1d(polyfit(range(len(red)),log(G_0/G_r),1))(range(len(red)))
+        red_coef = polyfit(range(len(red)),log(G_0/G_r),1)
+        plt.scatter(range(len(red)), log(G_0/G_r), color="red", label="red filters")
+        plt.plot(range(len(red)), red_fit, '--r', label="y = {:.2f}x + {:.2f}".format(red_coef[0], red_coef[1]))
+
+
+        blue_fit =poly1d(polyfit(range(len(blue)),log(G_0/G_b),1))(range(len(blue)))
+        blue_coef = polyfit(range(len(blue)),log(G_0/G_b),1)
+        plt.scatter(range(len(blue)), log(G_0/G_b), color="blue", label="blue filters")
+        plt.plot(range(len(blue)), blue_fit, '--b', label="y = {:.2f}x + {:.2f}".format(blue_coef[0], blue_coef[1]))
+
+        plt.xlabel("Number of filters")
+        plt.ylabel(r"$ln(\frac{G_0}{G(n)})$")
+        plt.legend()
+        plt.show()
+    def polar():
+        theta = [0,30,45,60,90]
+        R = [24.74e3, 20.26e3, 11.32e3, 13.23e3, 13.47e3]
+        G_0 = 1/(7.17e3)
+        G_theta = 1/array(R)
+
+        plt.scatter(theta, G_theta/G_0, color="orange", label="Data")
+        plt.plot(theta, cos(deg2rad(theta))**2, color="purple", label="Malus' Law")
+        plt.xlabel(r"$\theta$ ($^{\circ}$)")
+        plt.ylabel(r"$\frac{G(\theta)}{G_0}$")
+        plt.legend()
+        plt.show()
+    red_blue()
+    polar()
+Laser2()
