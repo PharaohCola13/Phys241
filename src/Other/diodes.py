@@ -108,23 +108,30 @@ def Part2():
     plt.show()
 def Laser2():
     def red_blue():
-        red = [6.84e3, 12.73e3, 13.46e3, 14.52e3, 15.43e3]
-        blue = [44.5e3, 56.4e3, 46.3e3, 54.1e3]
+        red = [7.17e3, 6.84e3, 12.73e3, 13.46e3, 14.52e3, 15.43e3]
+        blue = [7.17e3, 44.5e3, 56.4e3, 46.3e3, 54.1e3]
 
         G_0 = 1/(7.17e3)
         G_r = 1/array(red)
         G_b = 1/array(blue)
 
-        red_fit = poly1d(polyfit(range(len(red)),log(G_0/G_r),1))(range(len(red)))
-        red_coef = polyfit(range(len(red)),log(G_0/G_r),1)
-        plt.scatter(range(len(red)), log(G_0/G_r), color="red", label="red filters")
-        plt.plot(range(len(red)), red_fit, '--r', label="y = {:.2f}x + {:.2f}".format(red_coef[0], red_coef[1]))
+        red_fit = poly1d(polyfit(range(0, len(red)),log(G_0/G_r),1))(range(len(red)))
+        red_coef = polyfit(range(0, len(red)),log(G_0/G_r),1)
+        plt.scatter(range(0, len(red)), log(G_0/G_r), color="red", label="red filters")
 
 
         blue_fit =poly1d(polyfit(range(len(blue)),log(G_0/G_b),1))(range(len(blue)))
         blue_coef = polyfit(range(len(blue)),log(G_0/G_b),1)
-        plt.scatter(range(len(blue)), log(G_0/G_b), color="blue", label="blue filters")
-        plt.plot(range(len(blue)), blue_fit, '--b', label="y = {:.2f}x + {:.2f}".format(blue_coef[0], blue_coef[1]))
+        plt.scatter(range(0, len(blue)), log(G_0/G_b), color="blue", label="blue filters")
+
+
+        x = linspace(0, 5)
+        plt.plot(x, red_coef[0]*x+red_coef[1], '--r', label="y = {:.2f}x + {:.2f}".format(red_coef[0], red_coef[1]))
+        plt.plot(x, blue_coef[0]*x+blue_coef[1], '--b', label="y = {:.2f}x + {:.2f}".format(blue_coef[0], blue_coef[1]))
+        # print(x)
+        # print(red_coef[0]*x+red_coef[1] == blue_coef[0]*x+blue_coef[1])
+        # print(blue_coef[0]*x+blue_coef[1])
+        # print(red_coef[0]*x+red_coef[1])
 
         plt.xlabel("Number of filters")
         plt.ylabel(r"$ln(\frac{G_0}{G(n)})$")
@@ -144,4 +151,4 @@ def Laser2():
         plt.show()
     red_blue()
     polar()
-Laser2()
+Part2()
